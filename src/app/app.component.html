@@ -1,6 +1,27 @@
-<app-navbar></app-navbar>
-<app-sidebar></app-sidebar>
+<mat-toolbar>
+    <button mat-button (click)="openSidenav()">
+        <mat-icon>menu</mat-icon>
+    </button>
 
-<h1>Hola mundo</h1>
+    <button mat-button>
+        <mat-icon>account_circle</mat-icon>
+    </button>
+</mat-toolbar>
 
-<button (click)="getAuthorizationCode()">Abrir ventana</button>
+<aside class="sidebar active">
+    <a class="profile">
+        <mat-icon>account_circle</mat-icon>
+        <span class="profile-name">Freddy Michelena</span>
+    </a>
+
+    <mat-divider></mat-divider>
+
+    <app-sidebar-tree></app-sidebar-tree>
+
+</aside>
+
+
+<main class="main-container">
+    <h1 id="title">Hola mundo</h1>
+    <button (click)="getAuthorizationCode()">Abrir ventana</button>
+</main>

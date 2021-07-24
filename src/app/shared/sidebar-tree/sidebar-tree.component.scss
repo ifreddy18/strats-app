@@ -1,0 +1,28 @@
+@import '../../../assets/base';
+
+mat-tree {
+    width: 100%;
+    background-color: transparent;
+}
+
+mat-tree-node {
+    box-sizing: border-box;
+    width: 100%;
+    color: $sidebar-font-color;
+    letter-spacing: 1px;
+    cursor: pointer;
+
+    position: relative;
+    
+    mat-icon {
+        margin: 5px 10px 5px 15px;
+    }
+
+    &:hover {
+        color: $white;
+    }
+    button {
+        position: absolute;
+        right: 10px;
+    }
+}
