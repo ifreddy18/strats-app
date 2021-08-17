@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StravaAuthService } from './strava-auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+
+import { StravaAuthService } from './strava-auth.service';
+import { StravaService } from './strava.service';
 
 
 
@@ -14,7 +16,8 @@ import { RouterModule } from '@angular/router';
 		RouterModule
 	],
 	providers: [
-		StravaAuthService
+		StravaAuthService,
+		StravaService
 	]
 })
 export class StravaModule { }

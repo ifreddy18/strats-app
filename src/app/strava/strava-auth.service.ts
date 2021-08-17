@@ -16,6 +16,7 @@ export class StravaAuthService {
 	private scope = 'read_all,activity:read_all,profile:read_all';
 
 	public accessToken: string;
+	public stravaIsLinked = false;
 
 	constructor(
 		private routed: ActivatedRoute,
@@ -34,11 +35,13 @@ export class StravaAuthService {
 
 	initService(): void {
 		console.log('Strava Auth Service');
+		console.log(`stravaIsLinked: ${this.stravaIsLinked}`);
 
 		console.log(this.refreshToken.length);
 
 		if ( null !== sessionStorage.getItem('accessToken') ) {
 			this.accessToken = sessionStorage.getItem('accessToken');
+			this.stravaIsLinked = true;
 			return;
 		}
 
@@ -49,6 +52,7 @@ export class StravaAuthService {
 
 		this.getAthleteTokens();
 
+		console.log(`stravaIsLinked: ${this.stravaIsLinked}`);
 	}
 
 	/**
@@ -91,6 +95,7 @@ export class StravaAuthService {
 
 					sessionStorage.setItem('accessToken', resp.access_token);
 					this.setRefreshToken( resp.refresh_token );
+					this.stravaIsLinked = true;
 
 				}, ( err => console.warn(err) ));
 	}
@@ -109,6 +114,7 @@ export class StravaAuthService {
 
 					sessionStorage.setItem('accessToken', resp.access_token);
 					this.setRefreshToken( resp.refresh_token );
+					this.stravaIsLinked = true;
 
 				}, ( err => console.warn(err) ));
 	}

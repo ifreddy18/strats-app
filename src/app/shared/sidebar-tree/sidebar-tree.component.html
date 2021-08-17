@@ -1,13 +1,17 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    
     <!-- This is the tree node template for leaf nodes -->
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="15">
-        <!-- use a disabled button to provide padding for tree leaf -->
-        <!-- <button mat-icon-button><mat-icon>{{node.icon}}</mat-icon></button> -->
+    <mat-tree-node *matTreeNodeDef="let node"
+                    (click)="navigateTo(node.url)" 
+                    matTreeNodePadding 
+                    matTreeNodePaddingIndent="15">
+        
         <mat-icon>{{node.icon}}</mat-icon>
         {{node.name}}
+    
     </mat-tree-node>
-    <!-- This is the tree node template for expandable nodes -->
 
+    <!-- This is the tree node template for expandable nodes -->
     <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="15">
         <mat-icon>{{node.icon}}</mat-icon>
         {{node.name}}

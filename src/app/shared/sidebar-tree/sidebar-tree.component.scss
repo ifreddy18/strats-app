@@ -11,8 +11,12 @@ mat-tree-node {
     color: $sidebar-font-color;
     letter-spacing: 1px;
     cursor: pointer;
-
     position: relative;
+
+    a {
+        display: block;
+        width: 100%;
+    }
     
     mat-icon {
         margin: 5px 10px 5px 15px;

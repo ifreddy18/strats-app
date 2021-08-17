@@ -1,0 +1,97 @@
+@import '../../assets/base';
+
+mat-toolbar {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $white;
+    position: relative;
+
+    mat-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 30px;
+        color: $sidebar-font-color;
+    }
+
+    mat-menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .profile-img-button {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: 30px;
+        cursor: pointer;
+    }
+}
+
+.sidebar {
+    height: calc(100vh - 70px);
+    width: 240px;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 0 0;
+    background-color: $dark-grey;
+    color: $white;
+    transform: translate(-100%);
+    transition: all 300ms ease-in-out;
+
+    &.active {
+        transform: translate(0);
+    }
+
+    .profile {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 8px 35px 8px 15px;
+        text-align: start;
+        cursor: pointer;
+        color: $sidebar-font-color;
+        letter-spacing: 1px;
+        transition: all 300ms ease-in-out;
+
+        mat-icon {
+            width: 30px;
+            height: 30px;
+            font-size: 30px;
+            margin-right: 10px;
+        }
+
+        img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        
+        &:hover .profile-name{
+            color: $white;
+        }
+    }
+
+
+    mat-divider {
+        height: 1px;
+        width: 100%;
+        margin: 15px auto;
+        background-color: $sidebar-font-color;
+        opacity: .15;
+    }
+}
+
+app-sidebar-tree {
+    width: 100%;
+}
