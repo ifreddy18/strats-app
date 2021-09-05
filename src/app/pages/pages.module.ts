@@ -18,11 +18,14 @@ import { SharedModule } from '../shared/shared.module';
 // Components
 import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ComponentsModule } from '../components/components.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
 	declarations: [
 		PagesComponent,
-		ProfileComponent
+		DashboardComponent,
+		ProfileComponent,
 	],
 	imports: [
 		CommonModule,
@@ -35,8 +38,9 @@ import { ProfileComponent } from './profile/profile.component';
 		MatDividerModule,
 		MatTreeModule,
 		MatMenuModule,
+		PagesRoutingModule,
 		SharedModule,
-		PagesRoutingModule
+		ComponentsModule
 	],
 	exports: [
 		PagesComponent

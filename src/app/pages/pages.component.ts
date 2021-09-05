@@ -13,6 +13,8 @@ export class PagesComponent implements AfterViewInit {
 
 	public sidebar;
 	public user: UserModel;
+	public activitiesPage = 0;
+	public athleteActivities = [];
 
 	constructor(
 		public sidebarService: SidebarService,
@@ -20,6 +22,7 @@ export class PagesComponent implements AfterViewInit {
 		public stravaService: StravaService
 	) {
 		this.getAthlete();
+		this.getAthleteActivities();
 	}
 
 	ngAfterViewInit(): void {
@@ -47,6 +50,7 @@ export class PagesComponent implements AfterViewInit {
 				profile,
 				date_preference,
 				measurement_preference,
+				created_at
 			} = resp;
 
 			this.user = {
@@ -58,10 +62,41 @@ export class PagesComponent implements AfterViewInit {
 				profile,
 				date_preference,
 				measurement_preference,
+				created_at
 			};
 
+			this.stravaService.user = this.user;
 			console.log(this.user);
 
+			// Linea para guardar datos en string y llevarmelos al trabajo
+			localStorage.setItem('athlete', JSON.stringify(resp));
+
 		}, err => console.warn(err));
+	}
+
+	/**
+	 * Metodo con el que se obtienen todas las actividades realizadas por el athleta
+	 */
+	getAthleteActivities(): void {
+		this.activitiesPage++;
+		this.stravaService.getAthleteActivities(this.activitiesPage).subscribe( (resp: any) => {
+			this.athleteActivities = this.athleteActivities.concat(resp);
+			if (resp.length === 200) {
+				this.getAthleteActivities();
+			} else {
+				this.stravaService.athleteActivities = this.athleteActivities;
+				this.athleteActivities.forEach( activity => {
+					if (!this.stravaService.activityTypeList.includes(activity.type)) {
+						this.stravaService.activityTypeList.push(activity.type);
+					}
+				});
+				
+				console.log(this.athleteActivities);
+				console.log(this.stravaService.activityTypeList);
+
+				// Linea para guardar datos en string y llevarmelos al trabajo
+				localStorage.setItem('activities', JSON.stringify(this.athleteActivities));
+			}
+		});
 	}
 }
