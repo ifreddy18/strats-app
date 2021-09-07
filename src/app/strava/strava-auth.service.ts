@@ -35,7 +35,6 @@ export class StravaAuthService {
 
 	initService(): void {
 		console.log('Strava Auth Service');
-		console.log(`stravaIsLinked: ${this.stravaIsLinked}`);
 
 		console.log(this.refreshToken.length);
 

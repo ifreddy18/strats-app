@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { StravaService } from '../../strava/strava.service';
 
 @Component({
@@ -18,7 +17,7 @@ export class RangePillsComponent  {
 	disabledSelectYear = false;
 	disabledSelectMonth = true;
 	activedRange = 'year';
-	activedType = 'all';
+	activedTypes = this.stravaService.activityTypeList;
 	allActivities = [];
 	filterActivities = [];
 
@@ -32,7 +31,7 @@ export class RangePillsComponent  {
 		
 		this.stravaService.getAthleteAllActivities.subscribe( (resp: any) => {
 			this.allActivities = resp;
-			this.getDataByRangeAndType(this.activedRange, this.activedType);
+			this.getDataByRangeAndType(this.activedRange, this.activedTypes);
 		});
 	}
 
@@ -129,12 +128,12 @@ export class RangePillsComponent  {
 	
 	}
 
-	getDataByRangeAndType(range: string, type: string): void {
+	getDataByRangeAndType(range: string, types: string[]): void {
 		console.log({range});
-		console.log({type});
+		console.log(types);
 
-	    this.activedRange = range == 'default' ? this.activedRange : range;
-	    this.activedType = type == 'default' ? this.activedType : type;
+	    this.activedRange = range === 'default' ? this.activedRange : range;
+	    this.activedTypes = types === ['default'] ? this.activedTypes : types;
 	    
 	    this.disabledSelectYear = true;
 		this.disabledSelectMonth = true;
@@ -166,21 +165,49 @@ export class RangePillsComponent  {
 	            break;
 	    }
 	
-	    if (this.activedType.toLowerCase() != 'all') {
-	        this.filterActivities = this.filterActivities.filter( activity => 
-	            activity.type.toLowerCase() == this.activedType.toLowerCase()
+	    // if (this.activedTypes.toLowerCase() != 'all') {
+	    //     this.filterActivities = this.filterActivities.filter( activity => 
+	    //         activity.type.toLowerCase() == this.activedTypes.toLowerCase()
+	    //     );
+	    // }
+
+		if (!this.activedTypes.includes('All')) {
+	        this.filterActivities = this.filterActivities.filter( activity =>
+				this.activedTypes.includes(activity.type)
 	        );
 	    }
+
+		console.log(this.filterActivities);
+		
 
 		this.eventEmitter.emit(this.filterActivities);
 
 	}
 
-	onChange(event): void {
+	onChangeSelect(event): void {
 		console.log(this.selectedYear);
 		console.log(this.selectedMonth);
 		this.setDropDownMonth();
-		this.getDataByRangeAndType(this.activedRange, this.activedType);
+		this.getDataByRangeAndType(this.activedRange, this.activedTypes);
+	}
+
+	onChangeActivitiesTypes(activityType): void {
+		if (activityType == 'All') {
+			if (this.activedTypes.includes('All')) {
+				this.activedTypes = [];
+			} else {
+				this.activedTypes = this.stravaService.activityTypeList;
+			}
+		} else {
+			if (this.activedTypes.includes(activityType)) {
+				this.activedTypes = this.activedTypes.filter(type => type != activityType && type != 'All');
+			} else {
+				this.activedTypes.push(activityType);
+			}
+		}
+
+		this.getDataByRangeAndType('default', this.activedTypes);
+		
 	}
 
 

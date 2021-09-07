@@ -4,63 +4,63 @@
         Cargando...
     </div>
 
-    <div class="stats-container" *ngIf="false">
+    <div class="stats-container" *ngIf="activities">
         <span class="stats-item">
             <mat-icon>done_all</mat-icon>
             <span class="title">
-                <!-- <span>{{ activities }}</span> -->
+                <span>{{ activitiesStats.activitiesCount }}</span>
                 <span>Actividades</span>
             </span>
         </span>
-        <span class="stats-item">
+        <!-- <span class="stats-item">
             <mat-icon>done_all</mat-icon>
             <span class="title">
                 <span>{{ calories }}</span>
                 <span>Calorias</span>
             </span>
-        </span>
+        </span> -->
         <span class="stats-item">
             <mat-icon>done_all</mat-icon>
             <span class="title">
-                <span>{{ duration }}</span>
+                <span>{{ activitiesStats.duration }}</span>
                 <span>Duración</span>
             </span>
         </span>
         <span class="stats-item">
             <mat-icon>done_all</mat-icon>
             <span class="title">
-                <span>{{ distance }}</span>
+                <span>{{ activitiesStats.distance }}</span>
                 <span>Distancia</span>
             </span>
         </span>
         <span class="stats-item">
             <mat-icon>done_all</mat-icon>
             <span class="title">
-                <span>{{ distance }}</span>
+                <span>{{ activitiesStats.ritmo }}</span>
                 <span>Ritmo</span>
             </span>
         </span>
         <span class="stats-item">
             <mat-icon>done_all</mat-icon>
             <span class="title">
-                <span>{{ distance }}</span>
+                <span>{{ activitiesStats.velocidadMedia }}</span>
                 <span>Vel. media</span>
             </span>
         </span>
         <span class="stats-item">
             <mat-icon>done_all</mat-icon>
             <span class="title">
-                <span>{{ distance }}</span>
+                <span>{{ activitiesStats.elevacionGanada }}</span>
                 <span>Elevación ganada</span>
             </span>
         </span>
-        <span class="stats-item">
+        <!-- <span class="stats-item">
             <mat-icon>done_all</mat-icon>
             <span class="title">
                 <span>{{ distance }}</span>
                 <span>Elevación perdida</span>
             </span>
-        </span>
+        </span> -->
     </div>
     
     

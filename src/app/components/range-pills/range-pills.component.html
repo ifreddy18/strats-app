@@ -1,21 +1,40 @@
-<div class="activities-btn-container" *ngIf="stravaService.activityTypeList.length > 1">
+<!-- <div class="activities-btn-container" *ngIf="stravaService.activityTypeList.length > 1">
     <button *ngFor="let activityType of stravaService.activityTypeList"
             mat-stroked-button
             (click)="getDataByRangeAndType('default', activityType)">
         {{activityType}}
     </button>
-</div>
+</div> -->
 
-<div class="range-btn-container">
-    <button mat-flat-button class="" (click)="getDataByRangeAndType('all', 'default')">Todo</button>
-    <button mat-flat-button class="" (click)="getDataByRangeAndType('year', 'default')">Año</button>
-    <button mat-flat-button class="" (click)="getDataByRangeAndType('month', 'default')">Mes</button>
-</div>
+<mat-button-toggle-group 
+        name="activityType" 
+        aria-label="activityType" 
+        *ngIf="stravaService.activityTypeList.length > 1"
+        [value]="activedTypes"
+        multiple>
+    <mat-button-toggle *ngFor="let activityType of stravaService.activityTypeList"
+            [value]="activityType"
+            (click)="onChangeActivitiesTypes(activityType)">
+            {{ activityType | titlecase }}
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-button-toggle-group class="range-btn-container">
+    <mat-button-toggle mat-flat-button class="" (click)="getDataByRangeAndType('all', ['default'])">
+        Todo
+    </mat-button-toggle>
+    <mat-button-toggle mat-flat-button class="" (click)="getDataByRangeAndType('year', ['default'])">
+        Año
+    </mat-button-toggle>
+    <mat-button-toggle mat-flat-button class="" (click)="getDataByRangeAndType('month', ['default'])">
+        Mes
+    </mat-button-toggle>
+</mat-button-toggle-group>
 
 <mat-form-field appearance="fill" *ngIf="yearList.length > 0">
     <mat-label>Año</mat-label>
     <mat-select [(value)]="selectedYear" 
-                (selectionChange)="onChange($event)"
+                (selectionChange)="onChangeSelect($event)"
                 [disabled]="disabledSelectYear">
         <mat-option *ngFor="let year of yearList" [value]="year">
             {{ year }}
@@ -26,7 +45,7 @@
 <mat-form-field appearance="fill" *ngIf="monthList.length > 0">
     <mat-label>Mes</mat-label>
     <mat-select [(value)]="selectedMonth"
-                (selectionChange)="onChange($event)"
+                (selectionChange)="onChangeSelect($event)"
                 [disabled]="disabledSelectMonth">
         <mat-option *ngFor="let month of monthList" [value]="month.index">
             {{ month.name }}
