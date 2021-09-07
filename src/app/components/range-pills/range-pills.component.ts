@@ -6,10 +6,10 @@ import { StravaService } from '../../strava/strava.service';
 	templateUrl: './range-pills.component.html',
 	styleUrls: ['./range-pills.component.scss']
 })
-export class RangePillsComponent  {
+export class RangePillsComponent {
 
 	@Output() eventEmitter = new EventEmitter<any[]>();
-	
+
 	yearList = [];
 	monthList = [];
 	selectedYear: number;
@@ -28,8 +28,8 @@ export class RangePillsComponent  {
 				this.setDropDownMonth();
 			}
 		});
-		
-		this.stravaService.getAthleteAllActivities.subscribe( (resp: any) => {
+
+		this.stravaService.getAthleteAllActivities.subscribe((resp: any) => {
 			this.allActivities = resp;
 			this.getDataByRangeAndType(this.activedRange, this.activedTypes);
 		});
@@ -38,8 +38,8 @@ export class RangePillsComponent  {
 	setDropDownYear(): void {
 		let now = new Date();
 		let createdYear = new Date(this.stravaService.user.created_at).getFullYear();
-	
-		for(let i = now.getFullYear() - createdYear; i >= 0; i--) {
+
+		for (let i = now.getFullYear() - createdYear; i >= 0; i--) {
 			this.yearList.push(createdYear + i);
 		}
 
@@ -50,37 +50,35 @@ export class RangePillsComponent  {
 	setDropDownMonth(): void {
 		let now = new Date();
 		let createdAt = new Date(this.stravaService.user.created_at);
-		
+
 		let minMonth: number;
 		let maxMonth: number;
-	
+
 		this.monthList = [];
-	
+
 		if (createdAt.getFullYear() == this.selectedYear) {
 			minMonth = createdAt.getMonth() + 1;
 			maxMonth = 12;
-	
+
 			if (this.selectedYear == now.getFullYear()) {
 				maxMonth = now.getMonth() + 1;
 			}
-	
-		} else if (createdAt.getFullYear() < this.selectedYear 
-				&& (now.getFullYear() - this.selectedYear) > 0 ) {
+
+		} else if (createdAt.getFullYear() < this.selectedYear
+			&& (now.getFullYear() - this.selectedYear) > 0) {
 			minMonth = 1;
 			maxMonth = 12;
-	
-		} else if (createdAt.getFullYear() < this.selectedYear 
-				&& (now.getFullYear() - this.selectedYear) == 0 ) {
-			minMonth = 1;  
+
+		} else if (createdAt.getFullYear() < this.selectedYear
+			&& (now.getFullYear() - this.selectedYear) == 0) {
+			minMonth = 1;
 			maxMonth = now.getMonth() + 1;
 		}
 
-		// this.selectedMonth = maxMonth;
-
-		for(let i = minMonth; i <= maxMonth ; i++) {
+		for (let i = minMonth; i <= maxMonth; i++) {
 			let monthName;
 
-			switch(i) {
+			switch (i) {
 				case 1:
 					monthName = 'Enero';
 					break;
@@ -118,67 +116,63 @@ export class RangePillsComponent  {
 					monthName = 'Diciembre';
 					break;
 			}
-	
+
 			this.monthList.push({
-				index: i, 
+				index: i,
 				name: monthName
 			});
-		
+
 		}
-	
+
 	}
 
 	getDataByRangeAndType(range: string, types: string[]): void {
-		console.log({range});
+		console.log({ range });
 		console.log(types);
 
-	    this.activedRange = range === 'default' ? this.activedRange : range;
-	    this.activedTypes = types === ['default'] ? this.activedTypes : types;
-	    
-	    this.disabledSelectYear = true;
+		this.activedRange = range === '' ? this.activedRange : range;
+		this.activedTypes = JSON.stringify(types) === JSON.stringify([]) ? this.activedTypes : types;
+
+		console.log(this.activedTypes);
+
+		this.disabledSelectYear = true;
 		this.disabledSelectMonth = true;
-	
-	    switch(this.activedRange) {
-	        case 'all':
-	            this.filterActivities = this.allActivities;
-	            break;
-	
-	        case 'year':
+
+		switch (this.activedRange) {
+			case 'all':
+				this.filterActivities = this.allActivities;
+				break;
+
+			case 'year':
 				this.disabledSelectYear = false;
 
-	            this.filterActivities = this.allActivities.filter(activity => 
-	                new Date(activity.start_date).getFullYear() == this.selectedYear
-	            );
-	            break;
-	        
-	        case 'month':
-	            this.disabledSelectYear = false;
+				this.filterActivities = this.allActivities.filter(activity =>
+					new Date(activity.start_date).getFullYear() == this.selectedYear
+				);
+				break;
+
+			case 'month':
+				this.disabledSelectYear = false;
 				this.disabledSelectMonth = false;
 
-	            this.filterActivities = this.allActivities.filter(activity => 
-	                new Date(activity.start_date).getFullYear() == this.selectedYear 
-						&& ( new Date(activity.start_date).getMonth() + 1 ) == this.selectedMonth 
-	            );
-	            break;
-	        
-	        case 'week':
-	            break;
-	    }
-	
-	    // if (this.activedTypes.toLowerCase() != 'all') {
-	    //     this.filterActivities = this.filterActivities.filter( activity => 
-	    //         activity.type.toLowerCase() == this.activedTypes.toLowerCase()
-	    //     );
-	    // }
+				this.filterActivities = this.allActivities.filter(activity =>
+					new Date(activity.start_date).getFullYear() == this.selectedYear
+					&& (new Date(activity.start_date).getMonth() + 1) == this.selectedMonth
+				);
+				break;
+
+			case 'week':
+				break;
+		}
 
 		if (!this.activedTypes.includes('All')) {
-	        this.filterActivities = this.filterActivities.filter( activity =>
+			this.filterActivities = this.filterActivities.filter(activity =>
 				this.activedTypes.includes(activity.type)
-	        );
-	    }
+			);
+		}
 
 		console.log(this.filterActivities);
-		
+
 
 		this.eventEmitter.emit(this.filterActivities);
 
@@ -206,13 +200,13 @@ export class RangePillsComponent  {
 			}
 		}
 
-		this.getDataByRangeAndType('default', this.activedTypes);
-		
+		this.getDataByRangeAndType('', this.activedTypes);
+
 	}
 
 
 
-	
+
 
 
 

@@ -19,14 +19,14 @@
     </mat-button-toggle>
 </mat-button-toggle-group>
 
-<mat-button-toggle-group class="range-btn-container">
-    <mat-button-toggle mat-flat-button class="" (click)="getDataByRangeAndType('all', ['default'])">
+<mat-button-toggle-group class="range-btn-container" value="year">
+    <mat-button-toggle mat-flat-button class="" value="all" (click)="getDataByRangeAndType('all', [])">
         Todo
     </mat-button-toggle>
-    <mat-button-toggle mat-flat-button class="" (click)="getDataByRangeAndType('year', ['default'])">
+    <mat-button-toggle mat-flat-button class="" value="year" (click)="getDataByRangeAndType('year', [])">
         Año
     </mat-button-toggle>
-    <mat-button-toggle mat-flat-button class="" (click)="getDataByRangeAndType('month', ['default'])">
+    <mat-button-toggle mat-flat-button class="" value="month" (click)="getDataByRangeAndType('month', [])">
         Mes
     </mat-button-toggle>
 </mat-button-toggle-group>
