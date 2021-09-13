@@ -40,7 +40,6 @@ export class PagesComponent implements AfterViewInit {
 
 	getAthlete(): void {
 		this.stravaService.getAthlete().subscribe((resp: any) => {
-			console.log(resp);
 			const {
 				id,
 				firstname,
@@ -66,10 +65,6 @@ export class PagesComponent implements AfterViewInit {
 			};
 
 			this.stravaService.user = this.user;
-			console.log(this.user);
-
-			// Linea para guardar datos en string y llevarmelos al trabajo
-			localStorage.setItem('athlete', JSON.stringify(resp));
 
 		}, err => console.warn(err));
 	}
@@ -90,12 +85,6 @@ export class PagesComponent implements AfterViewInit {
 						this.stravaService.activityTypeList.push(activity.type);
 					}
 				});
-				
-				console.log(this.athleteActivities);
-				console.log(this.stravaService.activityTypeList);
-
-				// Linea para guardar datos en string y llevarmelos al trabajo
-				localStorage.setItem('activities', JSON.stringify(this.athleteActivities));
 			}
 		});
 	}

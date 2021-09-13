@@ -18,3 +18,13 @@ body {
   box-sizing: border-box;
   background-color: #f4f6f9;
 }
+
+.main-container {
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  // background: lightblue;
+}

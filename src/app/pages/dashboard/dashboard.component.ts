@@ -1,21 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { StravaService } from '../../strava/strava.service';
 
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
-	filterActivities = [];
+	dataToChart = {};
 
-	constructor() { }
+	constructor(public stravaService: StravaService) { }
 
-	ngOnInit(): void {
-	}
-
-	getFilterActivities(filterActivities) {
-		this.filterActivities = filterActivities;
+	getDataToChart(data): void {
+		this.dataToChart = data;
 	}
 
 }

@@ -34,9 +34,7 @@ export class StravaAuthService {
 	}
 
 	initService(): void {
-		console.log('Strava Auth Service');
-
-		console.log(this.refreshToken.length);
+		// console.log(this.refreshToken.length);
 
 		if ( null !== sessionStorage.getItem('accessToken') ) {
 			this.accessToken = sessionStorage.getItem('accessToken');

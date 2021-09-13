@@ -12,7 +12,19 @@
     rango van a trabajar
  -->
 
-<app-range-pills (eventEmitter)="getFilterActivities($event)"></app-range-pills>
+<main *ngIf="stravaService.athleteActivities" class="main-container">
 
-<app-general-stats [activities]="filterActivities"></app-general-stats>
+     <app-range-pills (eventEmitter)="getDataToChart($event)"></app-range-pills>
+     
+     <app-general-stats [dataToChart]="dataToChart"></app-general-stats>
+     
+     <app-best-stats [dataToChart]="dataToChart"></app-best-stats>
+
+     <app-duration-chart [dataToChart]="dataToChart"></app-duration-chart>
+
+ </main>
+
+<main *ngIf="!stravaService.athleteActivities" class="main-container">
+    <h2>Cargando...</h2>
+</main>
 

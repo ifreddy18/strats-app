@@ -1,0 +1,5 @@
+<button (click)="removeData()">RemoveData</button>
+<button (click)="updateChart()">Update</button>
+<div *ngIf="dataToChart">
+    <canvas #canvas style="width: 100%; height: 500px;"></canvas>
+</div>

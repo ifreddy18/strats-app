@@ -14,11 +14,12 @@ import { MatMenuModule } from '@angular/material/menu';
 // Modules
 import { PagesRoutingModule } from './pages.routing';
 import { SharedModule } from '../shared/shared.module';
+import { ChartsModule } from '../charts/charts.module';
+import { ComponentsModule } from '../components/components.module';
 
 // Components
 import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ComponentsModule } from '../components/components.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
@@ -40,7 +41,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 		MatMenuModule,
 		PagesRoutingModule,
 		SharedModule,
-		ComponentsModule
+		ComponentsModule,
+		ChartsModule
 	],
 	exports: [
 		PagesComponent

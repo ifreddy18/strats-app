@@ -14,12 +14,6 @@ export class StravaService {
 	public athleteActivities: any[];
 	public activityTypeList = ['All'];
 	public distances = [];
-	/**
-	 * Crear una metodo (para cada valor), que dado un rango de fechas, regrese un array con los valores
-	 * con que le estoy pidiendo, con ID y fecha.
-	 * El array sera usado para las graficas.
-	 * Para obtener el valor total debo sumar el total de los valores contenidos en el array.
-	 */
 
 	constructor(
 		private http: HttpClient,
@@ -33,7 +27,7 @@ export class StravaService {
 	getAthleteData = new Observable(observer => {
 		const intervalo = setInterval(() => {
 			observer.next(this.user);
-			if(this.user) {
+			if (this.user) {
 				observer.complete();
 				clearInterval(intervalo);
 			}
@@ -42,7 +36,7 @@ export class StravaService {
 
 	getAthleteAllActivities = new Observable(observer => {
 		const intervalo = setInterval(() => {
-			if(this.athleteActivities) {
+			if (this.athleteActivities) {
 				observer.next(this.athleteActivities);
 				observer.complete();
 				clearInterval(intervalo);
@@ -56,14 +50,9 @@ export class StravaService {
 		});
 	}
 
-	getAthleteStats(): any {
+	getAthleteStats(): Observable<object> {
 		return this.http.get(`${this.baseUrl}/athletes/68259044/stats`, {
 			headers: this.headers
-		}).subscribe( resp => {
-			console.log(resp);
-			// Linea para guardar datos en string y llevarmelos al trabajo
-			localStorage.setItem('athlete_stats', JSON.stringify(resp));
-			console.log(JSON.parse(localStorage.getItem('athlete_stats')));
 		});
 	}
 
