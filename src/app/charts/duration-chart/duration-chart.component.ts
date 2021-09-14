@@ -1,31 +1,44 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 // import { Chart, ChartDataset, ChartOptions } from 'chart.js';
 import Chart from 'chart.js/auto';
 import { StravaService } from '../../strava/strava.service';
 import * as moment from 'moment';
+import { ChartService } from '../../services/chart.service';
+import { DataToChart } from '../../models/data-chart.model';
 
 @Component({
 	selector: 'app-duration-chart',
 	templateUrl: './duration-chart.component.html',
 	styleUrls: ['./duration-chart.component.scss']
 })
-export class DurationChartComponent implements AfterViewInit {
+export class DurationChartComponent implements AfterViewInit, OnChanges {
 
-	@Input() dataToChart;
+	@Input() dataToChart: DataToChart;
 	@ViewChild('canvas') canvas;
 	public ctx;
 	public myChart;
-	public activitiesByWeek = [];
-	public datesByWeek = [];
+	public activitiesValue = [];
+	public dates = [];
+	public showChartBy = 'week';
 
-	constructor(public stravaService: StravaService) { }
+	constructor(
+		public stravaService: StravaService,
+		public chartService: ChartService
+	) { }
 
 	ngAfterViewInit(): void {
 		this.ctx = this.canvas.nativeElement;
 
 		const intervalo = setInterval(() => {
 			if (this.dataToChart) {
-				this.activitiesToChart(this.dataToChart);
+				const {
+					dates,
+					activitiesInRange
+				} = this.chartService.activitiesToChart(this.dataToChart, this.dates, this.activitiesValue);
+
+				this.dates = dates;
+				this.activitiesValue = activitiesInRange;
+
 				this.renderChart();
 				clearInterval(intervalo);
 			}
@@ -33,15 +46,21 @@ export class DurationChartComponent implements AfterViewInit {
 
 	}
 
+	ngOnChanges(): void {
+		if (this.myChart) {
+			this.updateChart();
+		}
+	}
+
 	renderChart(): void {
 		this.myChart = new Chart(this.ctx, {
 			type: 'bar',
 			data: {
-				labels: this.datesByWeek.map(date => `${date.format('YYYY-MM-DD')} al ${date.endOf('week').format('YYYY-MM-DD')}`),
+				labels: this.dates.map(date => `${date.format('YYYY-MM-DD')} al ${date.endOf('week').format('YYYY-MM-DD')}`),
 				datasets: [
 					{
 						label: 'Moving Time',
-						data: this.activitiesByWeek.map(duration => duration / 3600),
+						data: this.activitiesValue.map(duration => duration / 3600),
 						backgroundColor: ['rgba(255, 99, 132, 0.8)']
 					}
 				]
@@ -50,100 +69,21 @@ export class DurationChartComponent implements AfterViewInit {
 	}
 
 	updateChart(): void {
-		this.removeData();
-		this.activitiesToChart(this.dataToChart);
-		this.addData();
-	}
-
-	addData(): void {
-		this.myChart.data.labels = this.datesByWeek.map(date => `${date.format('YYYY-MM-DD')} al ${date.endOf('week').format('YYYY-MM-DD')}`),
-
-			this.myChart.data.datasets.forEach(dataset => {
-				if (dataset.label === 'Moving Time') {
-					dataset.data = this.activitiesByWeek.map(duration => duration / 60);
-				}
-			});
-		this.myChart.update();
-	}
-
-	removeData(): void {
-		this.myChart.data.labels = [];
-		this.myChart.data.datasets.forEach(dataset => {
-			dataset.data.pop();
-		});
-		this.myChart.update();
-	}
-
-
-	/**
-	 * @param activitiesArray: Array of filter activities
-	 * @param rangeType: all, year or month
-	 * @param year: Fecha de inicio
-	 * @param month: Fecha final
-	 */
-	activitiesToChart(dataToChart): void {
-
-		const datesByDay = []; // Day dates since startDate to today
-		let startDate;
-		let endOfRange;
+		this.chartService.removeData(this.myChart);
 
 		const {
-			activities,
-			selectedYear,
-			selectedMonth,
-			range
-		} = dataToChart;
+			dates,
+			activitiesInRange
+		} = this.chartService.activitiesToChart(this.dataToChart, this.dates, this.activitiesValue);
 
-		this.datesByWeek = [];
-		this.activitiesByWeek = [];
+		this.dates = dates;
+		this.activitiesValue = activitiesInRange;
 
-		let i = 0;
-		let dateByWeekFormated;
+		this.chartService.addData(this.myChart, this.dates, this.activitiesValue);
+	}
 
-		switch (range.toLowerCase()) {
-			case 'all':
-				startDate = moment(this.stravaService.user.created_at).startOf('day');
-				endOfRange = moment();
-				break;
-
-			case 'year':
-				startDate = moment().year(selectedYear).format('YYYY')
-					=== moment(this.stravaService.user.created_at).format('YYYY')
-					? moment(this.stravaService.user.created_at)
-					: moment().year(selectedYear).startOf('year');
-
-				endOfRange = moment().year(selectedYear).format('YYYY')
-					=== moment().format('YYYY')
-					// ? moment().endOf('month')
-					? moment()
-					: moment().year(selectedYear).endOf('year');
-
-				break;
-
-			case 'month':
-				startDate = moment().year(selectedYear).month(selectedMonth - 1).startOf('month');
-				endOfRange = moment().year(selectedYear).month(selectedMonth - 1).endOf('month');
-				break;
-		}
-
-		do {
-			this.datesByWeek.push(startDate.clone().add(i, 'day').startOf('week'));
-			this.activitiesByWeek.push(0); // To use the same length of datesByWeek
-			i += 7;
-		} while (endOfRange.startOf('week').format('YYYY-MM-DD')
-			!== startDate.clone().add(i - 7, 'day').startOf('week').format('YYYY-MM-DD'));
-
-
-		dateByWeekFormated = this.datesByWeek.map(date => date.format('YYYY-MM-DD'));
-
-		activities.forEach(activity => {
-			const activityDate = moment(activity.start_date).startOf('week').format('YYYY-MM-DD');
-			const index = dateByWeekFormated.indexOf(activityDate);
-			if (index !== -1) {
-				this.activitiesByWeek[index] += activity.moving_time;
-			}
-		});
-
+	onChangeSelect(event): void {
+		console.log(this.showChartBy);
 	}
 
 

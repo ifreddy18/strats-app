@@ -1,5 +1,14 @@
-<button (click)="removeData()">RemoveData</button>
-<button (click)="updateChart()">Update</button>
+<mat-form-field appearance="fill">
+    <mat-label>Show by</mat-label>
+    <mat-select [(value)]="showChartBy" 
+                (selectionChange)="onChangeSelect($event)">
+        <mat-option value="year">Year</mat-option>
+        <mat-option value="month">Month</mat-option>
+        <mat-option value="week">Week</mat-option>
+        <mat-option value="day">Day</mat-option>
+    </mat-select>
+</mat-form-field>
+
 <div *ngIf="dataToChart">
     <canvas #canvas style="width: 100%; height: 500px;"></canvas>
 </div>
