@@ -1,14 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { StravaService } from '../../strava/strava.service';
+import { DataToChart } from '../../models/data-chart.model';
 
 @Component({
 	selector: 'app-general-stats',
 	templateUrl: './general-stats.component.html',
 	styleUrls: ['./general-stats.component.scss']
 })
-export class GeneralStatsComponent {
+export class GeneralStatsComponent implements OnChanges {
 
-	@Input() activities = [];
+	@Input() dataToChart: DataToChart;
+	activities = [];
 	countWithAverageSpeed = 0;
 	totalAverageSpeed = 0;
 	totalDistance = 0;
@@ -16,6 +18,12 @@ export class GeneralStatsComponent {
 	totalElevation = 0;
 
 	constructor(public stravaService: StravaService) {
+	}
+
+	ngOnChanges(): void {
+		if (this.dataToChart) {
+			this.activities = this.dataToChart.activities;
+		}
 	}
 
 	get activitiesStats(): object {

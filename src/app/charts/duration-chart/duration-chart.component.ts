@@ -17,7 +17,7 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 	@ViewChild('canvas') canvas;
 	public ctx;
 	public myChart;
-	public activitiesValue = [];
+	public activitiesParamValue = [];
 	public dates = [];
 	public showChartBy = 'week';
 
@@ -33,11 +33,11 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 			if (this.dataToChart) {
 				const {
 					dates,
-					activitiesInRange
-				} = this.chartService.activitiesToChart(this.dataToChart, this.dates, this.activitiesValue);
+					activitiesParamValue
+				} = this.chartService.activitiesToChart(this.dataToChart, this.showChartBy);
 
 				this.dates = dates;
-				this.activitiesValue = activitiesInRange;
+				this.activitiesParamValue = activitiesParamValue;
 
 				this.renderChart();
 				clearInterval(intervalo);
@@ -56,11 +56,11 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 		this.myChart = new Chart(this.ctx, {
 			type: 'bar',
 			data: {
-				labels: this.dates.map(date => `${date.format('YYYY-MM-DD')} al ${date.endOf('week').format('YYYY-MM-DD')}`),
+				labels: this.dates.map(date => this.chartService.getLabelsFormat(date, this.showChartBy)),
 				datasets: [
 					{
 						label: 'Moving Time',
-						data: this.activitiesValue.map(duration => duration / 3600),
+						data: this.activitiesParamValue.map(duration => duration / 3600),
 						backgroundColor: ['rgba(255, 99, 132, 0.8)']
 					}
 				]
@@ -73,17 +73,17 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 
 		const {
 			dates,
-			activitiesInRange
-		} = this.chartService.activitiesToChart(this.dataToChart, this.dates, this.activitiesValue);
+			activitiesParamValue
+		} = this.chartService.activitiesToChart(this.dataToChart, this.showChartBy);
 
 		this.dates = dates;
-		this.activitiesValue = activitiesInRange;
+		this.activitiesParamValue = activitiesParamValue;
 
-		this.chartService.addData(this.myChart, this.dates, this.activitiesValue);
+		this.chartService.addData(this.myChart, this.dates, this.activitiesParamValue, this.showChartBy);
 	}
 
 	onChangeSelect(event): void {
-		console.log(this.showChartBy);
+		this.updateChart();
 	}
 
 

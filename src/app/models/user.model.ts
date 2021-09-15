@@ -5,7 +5,7 @@ export interface UserModel {
 	username: string;
 	profile_medium: string;
 	profile: string;
-	date_preference: string; //"%m/%d/%Y"
+	date_preference: string; // "%m/%d/%Y"
 	measurement_preference: string;
 	created_at: string;
 }
