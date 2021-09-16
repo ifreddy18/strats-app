@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 // import { Chart, ChartDataset, ChartOptions } from 'chart.js';
-import Chart from 'chart.js/auto';
+import Chart, { ChartDataset } from 'chart.js/auto';
 import { StravaService } from '../../strava/strava.service';
 import * as moment from 'moment';
 import { ChartService } from '../../services/chart.service';
@@ -20,6 +20,10 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 	public activitiesParamValue = [];
 	public dates = [];
 	public showChartBy = 'week';
+	@Input() activityParam = 'moving_time'; // moving_time ; distance
+	@Input() labelForDataset = 'Moving Time (hours)';
+	@Input() backgroundColor = ['rgba(255, 99, 132, 0.8)'];
+	// public chartDatasets: ChartDataset;
 
 	constructor(
 		public stravaService: StravaService,
@@ -34,7 +38,7 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 				const {
 					dates,
 					activitiesParamValue
-				} = this.chartService.activitiesToChart(this.dataToChart, this.showChartBy);
+				} = this.chartService.activitiesToChart(this.dataToChart, this.showChartBy, this.activityParam);
 
 				this.dates = dates;
 				this.activitiesParamValue = activitiesParamValue;
@@ -59,9 +63,11 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 				labels: this.dates.map(date => this.chartService.getLabelsFormat(date, this.showChartBy)),
 				datasets: [
 					{
-						label: 'Moving Time',
-						data: this.activitiesParamValue.map(duration => duration / 3600),
-						backgroundColor: ['rgba(255, 99, 132, 0.8)']
+						label: this.labelForDataset,
+						data: this.activitiesParamValue.map( value =>
+							this.chartService.getFotmatedDataForDataset(this.activityParam, value)
+						),
+						backgroundColor: this.backgroundColor
 					}
 				]
 			}
@@ -74,18 +80,22 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 		const {
 			dates,
 			activitiesParamValue
-		} = this.chartService.activitiesToChart(this.dataToChart, this.showChartBy);
+		} = this.chartService.activitiesToChart(this.dataToChart, this.showChartBy, this.activityParam);
 
 		this.dates = dates;
 		this.activitiesParamValue = activitiesParamValue;
 
-		this.chartService.addData(this.myChart, this.dates, this.activitiesParamValue, this.showChartBy);
+		this.chartService.addData(
+			this.myChart,
+			this.dates,
+			this.activitiesParamValue,
+			this.showChartBy,
+			this.activityParam
+		);
 	}
 
 	onChangeSelect(event): void {
 		this.updateChart();
 	}
-
-
 
 }

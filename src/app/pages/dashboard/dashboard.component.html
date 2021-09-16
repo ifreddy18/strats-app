@@ -20,7 +20,18 @@
      
      <app-best-stats [dataToChart]="dataToChart"></app-best-stats>
 
-     <app-duration-chart [dataToChart]="dataToChart"></app-duration-chart>
+     <app-duration-chart 
+        [dataToChart]="dataToChart" 
+        [activityParam]="'moving_time'" 
+        [labelForDataset]="'Moving Time (h)'">
+    </app-duration-chart>
+     <app-duration-chart 
+        [dataToChart]="dataToChart" 
+        [activityParam]="'distance'" 
+        [labelForDataset]="'Distance (Km)'" 
+        [backgroundColor]="['rgba(150, 99, 132, 0.8)']">
+    </app-duration-chart>
+
 
  </main>
 
