@@ -1,5 +1,7 @@
-<mat-toolbar>
-    <button mat-button (click)="toggleSidebar()">
+<mat-toolbar class="topbar">
+    <button class="menu-btn"
+            mat-button 
+            (click)="toggleSidebar()">
         <mat-icon>menu</mat-icon>
     </button>
 
@@ -34,11 +36,8 @@
         class="profile-img">
         <span class="profile-name" *ngIf="user">{{ user.firstname }} {{ user.lastname }}</span>
     </a>
-
     <mat-divider></mat-divider>
-
     <app-sidebar-tree></app-sidebar-tree>
-
 </aside>
 
 <router-outlet></router-outlet>

@@ -1,46 +1,57 @@
-<mat-button-toggle-group 
-        name="activityType" 
-        aria-label="activityType" 
-        *ngIf="stravaService.activityTypeList.length > 1"
-        [value]="activedTypes"
-        multiple>
-    <mat-button-toggle *ngFor="let activityType of stravaService.activityTypeList"
-            [value]="activityType"
-            (click)="onChangeActivitiesTypes(activityType)">
-            {{ activityType | titlecase }}
-    </mat-button-toggle>
-</mat-button-toggle-group>
+<div class="range-pills-container">
+    <mat-button-toggle-group
+            class="type-btn-container"
+            name="activityType" 
+            aria-label="activityType" 
+            *ngIf="stravaService.activityTypeList.length > 1"
+            [value]="activedTypes"
+            multiple>
+        <mat-button-toggle *ngFor="let activityType of stravaService.activityTypeList"
+                [value]="activityType"
+                (click)="onChangeActivitiesTypes(activityType)">
+                {{ activityType | titlecase }}
+        </mat-button-toggle>
+    </mat-button-toggle-group>
 
-<mat-button-toggle-group class="range-btn-container" value="year">
-    <mat-button-toggle mat-flat-button class="" value="all" (click)="getDataByRangeAndType('all', [])">
-        Todo
-    </mat-button-toggle>
-    <mat-button-toggle mat-flat-button class="" value="year" (click)="getDataByRangeAndType('year', [])">
-        Año
-    </mat-button-toggle>
-    <mat-button-toggle mat-flat-button class="" value="month" (click)="getDataByRangeAndType('month', [])">
-        Mes
-    </mat-button-toggle>
-</mat-button-toggle-group>
+    <div class="range-container">
 
-<mat-form-field appearance="fill" *ngIf="yearList.length > 0">
-    <mat-label>Año</mat-label>
-    <mat-select [(value)]="selectedYear" 
-                (selectionChange)="onChangeSelect($event)"
-                [disabled]="disabledSelectYear">
-        <mat-option *ngFor="let year of yearList" [value]="year">
-            {{ year }}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
+        <mat-button-toggle-group class="range-btn-container" value="year">
+            <mat-button-toggle mat-flat-button value="all" (click)="getDataByRangeAndType('all', [])">
+                All
+            </mat-button-toggle>
+            <mat-button-toggle mat-flat-button value="year" (click)="getDataByRangeAndType('year', [])">
+                Year
+            </mat-button-toggle>
+            <mat-button-toggle mat-flat-button value="month" (click)="getDataByRangeAndType('month', [])">
+                Month
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+        
+        <div class="selects-container">
+            <mat-form-field appearance="fill" *ngIf="yearList.length > 0">
+                <mat-label>Year</mat-label>
+                <mat-select [(value)]="selectedYear" 
+                    (selectionChange)="onChangeSelect($event)"
+                    [disabled]="disabledSelectYear">
+                    <mat-option *ngFor="let year of yearList" [value]="year">
+                        {{ year }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" *ngIf="monthList.length > 0">
+                <mat-label>Month</mat-label>
+                <mat-select [(value)]="selectedMonth"
+                    (selectionChange)="onChangeSelect($event)"
+                    [disabled]="disabledSelectMonth">
+                    <mat-option *ngFor="let month of monthList" [value]="month.index">
+                        {{ month.name }}
+                    </mat-option>
+            </mat-select>
+            </mat-form-field>
+        </div>
 
-<mat-form-field appearance="fill" *ngIf="monthList.length > 0">
-    <mat-label>Mes</mat-label>
-    <mat-select [(value)]="selectedMonth"
-                (selectionChange)="onChangeSelect($event)"
-                [disabled]="disabledSelectMonth">
-        <mat-option *ngFor="let month of monthList" [value]="month.index">
-            {{ month.name }}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
+    </div>
+
+</div>
+

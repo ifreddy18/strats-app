@@ -202,6 +202,8 @@ export class ChartService {
 				return (value / 3600).toFixed(2);
 			case 'distance':
 				return (value / 1000).toFixed(2);
+			case 'total_elevation_gain':
+				return value;
 		}
 
 	}

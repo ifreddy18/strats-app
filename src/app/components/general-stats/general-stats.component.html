@@ -1,70 +1,53 @@
-<div class="component-container">
+<h3>{{ 'General Stats' }}</h3>
 
-    <h3>Totales acumulados</h3>
-
-    <div *ngIf="!activities">
-        Cargando...
-    </div>
-
-    <div class="stats-container" *ngIf="activities">
-        <span class="stats-item">
-            <mat-icon>done_all</mat-icon>
-            <span class="title">
-                <span>{{ activitiesStats.activitiesCount }}</span>
-                <span>Actividades</span>
-            </span>
-        </span>
-        <!-- <span class="stats-item">
-            <mat-icon>done_all</mat-icon>
-            <span class="title">
-                <span>{{ calories }}</span>
-                <span>Calorias</span>
-            </span>
-        </span> -->
-        <span class="stats-item">
-            <mat-icon>done_all</mat-icon>
-            <span class="title">
-                <span>{{ activitiesStats.duration }}</span>
-                <span>Duración</span>
-            </span>
-        </span>
-        <span class="stats-item">
-            <mat-icon>done_all</mat-icon>
-            <span class="title">
-                <span>{{ activitiesStats.distance }}</span>
-                <span>Distancia</span>
-            </span>
-        </span>
-        <span class="stats-item">
-            <mat-icon>done_all</mat-icon>
-            <span class="title">
-                <span>{{ activitiesStats.ritmo }}</span>
-                <span>Ritmo</span>
-            </span>
-        </span>
-        <span class="stats-item">
-            <mat-icon>done_all</mat-icon>
-            <span class="title">
-                <span>{{ activitiesStats.velocidadMedia }}</span>
-                <span>Vel. media</span>
-            </span>
-        </span>
-        <span class="stats-item">
-            <mat-icon>done_all</mat-icon>
-            <span class="title">
-                <span>{{ activitiesStats.elevacionGanada }}</span>
-                <span>Elevación ganada</span>
-            </span>
-        </span>
-        <!-- <span class="stats-item">
-            <mat-icon>done_all</mat-icon>
-            <span class="title">
-                <span>{{ distance }}</span>
-                <span>Elevación perdida</span>
-            </span>
-        </span> -->
-    </div>
-    
-    
+<div *ngIf="!activities">
+    Cargando...
 </div>
+
+<div class="stats-container" *ngIf="activities">
+    <span class="stats-item">
+        <mat-icon>done_all</mat-icon>
+        <span class="title">
+            <span>{{ activitiesStats.activitiesCount }}</span>
+            <span class="subtitle">Total activities</span>
+        </span>
+    </span>
+    <span class="stats-item">
+        <mat-icon>timer</mat-icon>
+        <span class="title">
+            <span>{{ activitiesStats.duration }}</span>
+            <span class="subtitle">Duration</span>
+        </span>
+    </span>
+    <span class="stats-item">
+        <mat-icon>straighten</mat-icon>
+        <span class="title">
+            <span>{{ activitiesStats.distance }}</span>
+            <span class="subtitle">Distance</span>
+        </span>
+    </span>
+    <span class="stats-item">
+        <mat-icon>trending_up</mat-icon>
+        <span class="title">
+            <span>{{ activitiesStats.elevacionGanada }}</span>
+            <span class="subtitle">Elevation gained</span>
+        </span>
+    </span>
+    <span class="stats-item">
+        <mat-icon>speed</mat-icon>
+        <span class="title">
+            <span>{{ activitiesStats.ritmo }}</span>
+            <span class="subtitle">Avg. Pace</span>
+        </span>
+    </span>
+    <span class="stats-item">
+        <mat-icon>speed</mat-icon>
+        <span class="title">
+            <span>{{ activitiesStats.velocidadMedia }}</span>
+            <span class="subtitle">Avg. Speed</span>
+        </span>
+    </span>
     
+
+</div>
+

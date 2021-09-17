@@ -80,40 +80,52 @@ export class RangePillsComponent {
 
 			switch (i) {
 				case 1:
-					monthName = 'Enero';
+					// monthName = 'Enero';
+					monthName = 'January';
 					break;
 				case 2:
-					monthName = 'Febrero';
+					// monthName = 'Febrero';
+					monthName = 'February';
 					break;
 				case 3:
-					monthName = 'Marzo';
+					// monthName = 'Marzo';
+					monthName = 'March';
 					break;
 				case 4:
-					monthName = 'Abril';
+					// monthName = 'Abril';
+					monthName = 'April';
 					break;
 				case 5:
-					monthName = 'Mayo';
+					// monthName = 'Mayo';
+					monthName = 'May';
 					break;
 				case 6:
-					monthName = 'Junio';
+					// monthName = 'Junio';
+					monthName = 'June';
 					break;
 				case 7:
-					monthName = 'Julio';
+					// monthName = 'Julio';
+					monthName = 'July';
 					break;
 				case 8:
-					monthName = 'Agosto';
+					// monthName = 'Agosto';
+					monthName = 'August';
 					break;
 				case 9:
-					monthName = 'Septiembre';
+					// monthName = 'Septiembre';
+					monthName = 'September';
 					break;
 				case 10:
-					monthName = 'Octubre';
+					// monthName = 'Octubre';
+					monthName = 'October';
 					break;
 				case 11:
-					monthName = 'Noviembre';
+					// monthName = 'Noviembre';
+					monthName = 'November';
 					break;
 				case 12:
-					monthName = 'Diciembre';
+					// monthName = 'Diciembre';
+					monthName = 'December';
 					break;
 			}
 

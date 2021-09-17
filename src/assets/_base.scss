@@ -1,14 +1,34 @@
 $white: #fff;
 $dark-grey: #242A33;
 $sidebar-font-color: #687384;
+$light-grey: #f4f6f9;
+
+$sidebar-width: 215px;
+$topbar-height: 70px;
 
 .component-container {
+    width: 100%;
     padding: 20px;
-    margin: 16px;
+    margin: 8px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
     background: $white;
+}
+
+mat-button-toggle {
+    .mat-button-toggle-button {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }

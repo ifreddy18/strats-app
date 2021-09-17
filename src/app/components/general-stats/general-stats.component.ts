@@ -75,6 +75,6 @@ export class GeneralStatsComponent implements OnChanges {
 	}
 
 	elevationInMeters(totalElevationGain: number): string {
-		return totalElevationGain > 0 ? `${this.totalElevation.toFixed(0)} metros` : '- metros';
+		return totalElevationGain > 0 ? `${this.totalElevation.toFixed(0)} m` : '- m';
 	}
 }

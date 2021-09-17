@@ -11,12 +11,14 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   //   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
-  background-color: #f4f6f9;
+  background-color: $light-grey;
+  padding-top: 70px;
 }
 
 .main-container {
@@ -26,5 +28,6 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 1rem;
-  // background: lightblue;
 }
+
+

@@ -2,7 +2,6 @@ import { Component, ElementRef, Input, ViewChild, AfterViewInit, OnChanges } fro
 // import { Chart, ChartDataset, ChartOptions } from 'chart.js';
 import Chart, { ChartDataset } from 'chart.js/auto';
 import { StravaService } from '../../strava/strava.service';
-import * as moment from 'moment';
 import { ChartService } from '../../services/chart.service';
 import { DataToChart } from '../../models/data-chart.model';
 
@@ -15,15 +14,16 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 
 	@Input() dataToChart: DataToChart;
 	@ViewChild('canvas') canvas;
+	@Input() activityParam = 'moving_time'; // moving_time ; distance
+	@Input() labelForDataset = 'Moving Time (hours)';
+	@Input() backgroundColor = ['rgba(255, 99, 132, 0.8)'];
+	@Input() inputIndexAxis;
 	public ctx;
 	public myChart;
 	public activitiesParamValue = [];
 	public dates = [];
-	public showChartBy = 'week';
-	@Input() activityParam = 'moving_time'; // moving_time ; distance
-	@Input() labelForDataset = 'Moving Time (hours)';
-	@Input() backgroundColor = ['rgba(255, 99, 132, 0.8)'];
-	// public chartDatasets: ChartDataset;
+	public showChartBy = 'month';
+	public options;
 
 	constructor(
 		public stravaService: StravaService,
@@ -32,6 +32,9 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 
 	ngAfterViewInit(): void {
 		this.ctx = this.canvas.nativeElement;
+		this.options = {
+			indexAxis: this.inputIndexAxis !== 'x' && this.inputIndexAxis !== 'y' ? 'x' : this.inputIndexAxis,
+		};
 
 		const intervalo = setInterval(() => {
 			if (this.dataToChart) {
@@ -70,7 +73,8 @@ export class DurationChartComponent implements AfterViewInit, OnChanges {
 						backgroundColor: this.backgroundColor
 					}
 				]
-			}
+			},
+			options: this.options,
 		});
 	}
 

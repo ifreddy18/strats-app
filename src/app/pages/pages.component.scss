@@ -1,14 +1,16 @@
 @import '../../assets/base';
 
-mat-toolbar {
-    height: 70px;
+.topbar {
+    height: $topbar-height;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: $white;
-    position: relative;
+    position: fixed;
+    top: 0;
+    z-index: 99;
 
     mat-icon {
         width: 30px;
@@ -35,9 +37,9 @@ mat-toolbar {
 
 .sidebar {
     height: calc(100vh - 70px);
-    width: 240px;
+    width: $sidebar-width;
     position: fixed;
-    top: 70px;
+    top: $topbar-height;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -45,6 +47,7 @@ mat-toolbar {
     padding: 15px 0 0;
     background-color: $dark-grey;
     color: $white;
+    z-index: 99;
     transform: translate(-100%);
     transition: all 300ms ease-in-out;
 
@@ -94,4 +97,16 @@ mat-toolbar {
 
 app-sidebar-tree {
     width: 100%;
+}
+
+@media (min-width: 1025px) {
+
+    .menu-btn {
+        z-index: -99;
+    }
+
+    .sidebar {
+        transform: translate(0);
+    }
+
 }
