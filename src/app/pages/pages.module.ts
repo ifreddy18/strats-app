@@ -21,12 +21,14 @@ import { ComponentsModule } from '../components/components.module';
 import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
 	declarations: [
 		PagesComponent,
 		DashboardComponent,
 		ProfileComponent,
+		HomeComponent,
 	],
 	imports: [
 		CommonModule,

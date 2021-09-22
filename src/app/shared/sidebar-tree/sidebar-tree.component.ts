@@ -22,7 +22,7 @@ const TREE_DATA: SidebarItemNode[] = [
 	{
 		name: 'Dashboard',
 		icon: 'dashboard',
-		url: 'dashboard2'
+		url: 'dashboard'
 	},
 	{
 		name: 'Actividades',

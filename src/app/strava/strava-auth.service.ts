@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -20,7 +20,8 @@ export class StravaAuthService {
 
 	constructor(
 		private routed: ActivatedRoute,
-		private http: HttpClient
+		private http: HttpClient,
+		private router: Router
 	) {
 		this.initService();
 	}
@@ -33,6 +34,10 @@ export class StravaAuthService {
 		return document.cookie.replace(/(?:(?:^|.*;\s*)refresh_token\s*\=\s*([^;]*).*$)|^.*$/, '$1');
 	}
 
+	deleteRefreshToken(): void {
+		document.cookie = 'refresh_token=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+	}
+
 	initService(): void {
 		// console.log(this.refreshToken.length);
 
@@ -42,14 +47,13 @@ export class StravaAuthService {
 			return;
 		}
 
-		if ( null !== this.refreshToken && this.refreshToken.length > 5) {
+		if ( null !== this.refreshToken && this.refreshToken.length > 0) {
 			this.getAccessToken();
 			return;
 		}
 
 		this.getAthleteTokens();
 
-		console.log(`stravaIsLinked: ${this.stravaIsLinked}`);
 	}
 
 	/**
@@ -90,6 +94,7 @@ export class StravaAuthService {
 					+ `&grant_type=authorization_code`, null)
 				.subscribe( (resp: any) => {
 
+					this.accessToken = resp.access_token;
 					sessionStorage.setItem('accessToken', resp.access_token);
 					this.setRefreshToken( resp.refresh_token );
 					this.stravaIsLinked = true;
@@ -109,11 +114,21 @@ export class StravaAuthService {
 					+ `&grant_type=refresh_token`, null)
 				.subscribe( (resp: any) => {
 
+					this.accessToken = resp.access_token;
 					sessionStorage.setItem('accessToken', resp.access_token);
 					this.setRefreshToken( resp.refresh_token );
 					this.stravaIsLinked = true;
 
 				}, ( err => console.warn(err) ));
+	}
+
+	logout(): void {
+		console.log('Logout');
+		this.deleteRefreshToken();
+		sessionStorage.removeItem('accessToken');
+		this.accessToken = null;
+		this.stravaIsLinked = false;
+		this.router.navigateByUrl('/home');
 	}
 
 

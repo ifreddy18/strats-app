@@ -1,0 +1,11 @@
+<h2 *ngIf="stravaAuthService.accessToken">
+    Connecting to Strava...
+    <br>
+    <span>
+        If this take more than few seconds, please reload. 
+    </span>
+</h2>
+
+<button (click)="getAuthorizationCode()" *ngIf="!stravaAuthService.accessToken">
+    Vincular con Strava
+</button>

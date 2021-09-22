@@ -26,10 +26,7 @@
         [backgroundColor]="['rgba(150, 99, 250, 0.8)']">
     </app-duration-chart>
 
-
- </main>
-
-<main *ngIf="!stravaService.athleteActivities" class="main-container">
-    <h2>Cargando...</h2>
 </main>
+
+<app-loading *ngIf="!stravaService.athleteActivities" class="main-container"><app-loading>
 

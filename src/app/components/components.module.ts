@@ -11,12 +11,14 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BestStatsComponent } from './best-stats/best-stats.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
 	declarations: [
 		GeneralStatsComponent,
 		RangePillsComponent,
-		BestStatsComponent
+		BestStatsComponent,
+		LoadingComponent,
 	],
 	imports: [
 		CommonModule,
@@ -32,7 +34,8 @@ import { BestStatsComponent } from './best-stats/best-stats.component';
 	exports: [
 		GeneralStatsComponent,
 		RangePillsComponent,
-		BestStatsComponent
+		BestStatsComponent,
+		LoadingComponent,
 	]
 })
 export class ComponentsModule { }

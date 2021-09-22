@@ -21,8 +21,8 @@
         <button mat-menu-item (click)="getAuthorizationCode()" *ngIf="!stravaAuthService.stravaIsLinked">
             <span>Vincular con Strava</span>
         </button>
-        <button mat-menu-item *ngIf="stravaAuthService.stravaIsLinked">
-            <span>Strava vinculado</span>
+        <button mat-menu-item (click)="logout() "*ngIf="stravaAuthService.stravaIsLinked">
+            <span>Logout</span>
         </button>
     </mat-menu>
 </mat-toolbar>
@@ -30,11 +30,13 @@
 <aside class="sidebar">
     <a class="profile" routerLink="profile" (click)="toggleSidebar()">
         <mat-icon *ngIf="!user">account_circle</mat-icon>
-        <img [src]="user.profile_medium" 
-        [alt]="user.username"  
-        *ngIf="user"
-        class="profile-img">
-        <span class="profile-name" *ngIf="user">{{ user.firstname }} {{ user.lastname }}</span>
+            <img [src]="user.profile_medium" 
+             [alt]="user.username"  
+             *ngIf="user"
+             class="profile-img">     
+        <span class="profile-name" *ngIf="user">
+            {{ user.firstname }} {{ user.lastname }}
+        </span>
     </a>
     <mat-divider></mat-divider>
     <app-sidebar-tree></app-sidebar-tree>

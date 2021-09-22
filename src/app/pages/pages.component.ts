@@ -21,8 +21,13 @@ export class PagesComponent implements AfterViewInit {
 		public stravaAuthService: StravaAuthService,
 		public stravaService: StravaService
 	) {
-		this.getAthlete();
-		this.getAthleteActivities();
+		setTimeout(() => {
+			console.log(stravaAuthService.accessToken);
+			if (stravaAuthService.accessToken !== null && stravaAuthService.accessToken !== undefined) {
+				this.getAthlete();
+				this.getAthleteActivities();
+			}
+		}, 3000);
 	}
 
 	ngAfterViewInit(): void {
@@ -52,7 +57,7 @@ export class PagesComponent implements AfterViewInit {
 				created_at
 			} = resp;
 
-			this.user = {
+			this.stravaService.user = {
 				id,
 				firstname,
 				lastname,
@@ -64,9 +69,14 @@ export class PagesComponent implements AfterViewInit {
 				created_at
 			};
 
-			this.stravaService.user = this.user;
+			this.user = this.stravaService.user;
 
-		}, err => console.warn(err));
+		}, err => {
+			console.warn(err);
+			if ( 401 === err.status ) {
+				location.reload();
+			}
+		});
 	}
 
 	/**
@@ -87,5 +97,11 @@ export class PagesComponent implements AfterViewInit {
 				});
 			}
 		});
+	}
+
+	logout(): void {
+		this.user = null;
+		this.stravaAuthService.logout();
+		this.stravaService.logout();
 	}
 }

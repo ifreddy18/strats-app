@@ -8,7 +8,6 @@ import { UserModel } from '../models/user.model';
 export class StravaService {
 
 	public baseUrl = 'https://www.strava.com/api/v3';
-	public accessToken: string;
 	public headers = new HttpHeaders();
 	public user: UserModel;
 	public athleteActivities: any[];
@@ -19,8 +18,8 @@ export class StravaService {
 		private http: HttpClient,
 		public stravaAuthService: StravaAuthService
 	) {
-		this.accessToken = stravaAuthService.accessToken;
-		this.headers = this.headers.set('Authorization', `Bearer ${this.accessToken}`);
+		console.log('PagesComponent - Constructor');
+		this.headers = this.headers.set('Authorization', `Bearer ${stravaAuthService.accessToken}`);
 		this.getAthleteStats();
 	}
 
@@ -64,6 +63,12 @@ export class StravaService {
 				page: `${page}`
 			}
 		});
+	}
+
+	logout(): void {
+		this.user = null;
+		this.athleteActivities = [];
+		this.activityTypeList = ['All'];
 	}
 
 
