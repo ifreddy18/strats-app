@@ -5,9 +5,7 @@ import { AppComponent } from './app.component';
 
 // Module
 import { StravaModule } from './strava/strava.module';
-import { SharedModule } from './shared/shared.module';
 import { PagesModule } from './pages/pages.module';
-import { ComponentsModule } from './components/components.module';
 
 // Components
 
@@ -20,8 +18,6 @@ import { ComponentsModule } from './components/components.module';
 		BrowserModule,
 		PagesModule,
 		StravaModule,
-		// SharedModule,
-		// ComponentsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

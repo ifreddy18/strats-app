@@ -25,24 +25,29 @@ const TREE_DATA: SidebarItemNode[] = [
 		url: 'dashboard'
 	},
 	{
-		name: 'Actividades',
-		icon: 'menu',
-		children: [
-			{
-				name: 'Green',
-				children: [
-					{ name: 'Broccoli' },
-					{ name: 'Brussels sprouts' },
-				]
-			}, {
-				name: 'Orange',
-				children: [
-					{ name: 'Pumpkins' },
-					{ name: 'Carrots' },
-				]
-			},
-		]
+		name: 'Activities',
+		icon: 'timeline',
+		url: 'dashboard/activities'
 	},
+	// {
+	// 	name: 'Actividades',
+	// 	icon: 'menu',
+	// 	children: [
+	// 		{
+	// 			name: 'Green',
+	// 			children: [
+	// 				{ name: 'Broccoli' },
+	// 				{ name: 'Brussels sprouts' },
+	// 			]
+	// 		}, {
+	// 			name: 'Orange',
+	// 			children: [
+	// 				{ name: 'Pumpkins' },
+	// 				{ name: 'Carrots' },
+	// 			]
+	// 		},
+	// 	]
+	// },
 ];
 
 

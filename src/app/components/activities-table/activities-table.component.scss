@@ -1,0 +1,53 @@
+@import '../../../assets/base';
+
+.component-container {
+    width: 100%;
+
+    .activities-table,
+    mat-paginator {
+        width: 100%;
+    }
+}
+
+.activities-table {
+    tr {
+        cursor: pointer;
+    
+        &:hover {
+            background-color: lightblue;
+        }
+    
+        td,
+        th {
+            padding: 0 8px 0 0;
+        }
+    
+        &:first-child {
+            padding: 0 8px 0 24px;
+        }
+    
+        &:last-child {
+            padding: 0 24px 0 0;
+        }
+    
+    }
+
+    .date {
+        font-size: 12px;
+        color: $dark-grey;
+    }
+}
+
+.mat-header-row {
+    cursor: auto !important;
+    
+    &:hover {
+        background-color: $white !important;
+    }
+    
+}
+
+
+
+
+

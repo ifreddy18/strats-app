@@ -8,7 +8,7 @@ import { StravaAuthService } from '../../strava/strava-auth.service';
 })
 export class HomeComponent {
 
-	constructor(private stravaAuthService: StravaAuthService) { }
+	constructor(public stravaAuthService: StravaAuthService) { }
 
 	getAuthorizationCode(): void {
 		this.stravaAuthService.getAuthorizationCode();

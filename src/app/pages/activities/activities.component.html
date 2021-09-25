@@ -1,0 +1,13 @@
+<main *ngIf="stravaService.athleteActivities" class="main-container">
+
+    <app-range-pills class="component-container" (eventEmitter)="getData($event)"></app-range-pills>
+ 
+    <h1>Activities</h1>
+
+    <app-activities-table *ngIf="activities" [activities]="activities"></app-activities-table>
+
+    <app-loading *ngIf="!activities" class="main-container"></app-loading>
+    
+</main>
+
+<app-loading *ngIf="!stravaService.athleteActivities" class="main-container"><app-loading>

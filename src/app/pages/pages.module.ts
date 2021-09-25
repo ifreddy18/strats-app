@@ -22,6 +22,7 @@ import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { ActivitiesComponent } from './activities/activities.component';
 
 @NgModule({
 	declarations: [
@@ -29,6 +30,7 @@ import { HomeComponent } from './home/home.component';
 		DashboardComponent,
 		ProfileComponent,
 		HomeComponent,
+		ActivitiesComponent,
 	],
 	imports: [
 		CommonModule,

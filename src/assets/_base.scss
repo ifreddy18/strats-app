@@ -25,6 +25,10 @@ mat-button-toggle {
     }
 }
 
+app-activities-table {
+    width: 100%;
+}
+
 @mixin flex-column {
     display: flex;
     flex-direction: column;
