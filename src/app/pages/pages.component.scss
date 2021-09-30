@@ -79,6 +79,10 @@
             margin-right: 10px;
             border-radius: 50%;
         }
+
+        .profile-name {
+            color: $sidebar-font-color;
+        }
         
         &:hover .profile-name{
             color: $white;

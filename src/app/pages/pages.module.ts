@@ -16,6 +16,7 @@ import { PagesRoutingModule } from './pages.routing';
 import { SharedModule } from '../shared/shared.module';
 import { ChartsModule } from '../charts/charts.module';
 import { ComponentsModule } from '../components/components.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 // Components
 import { PagesComponent } from './pages.component';
@@ -23,6 +24,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { ActivitiesComponent } from './activities/activities.component';
+import { ActivityDetailsComponent } from './activity-details/activity-details.component';
 
 @NgModule({
 	declarations: [
@@ -31,6 +33,7 @@ import { ActivitiesComponent } from './activities/activities.component';
 		ProfileComponent,
 		HomeComponent,
 		ActivitiesComponent,
+		ActivityDetailsComponent,
 	],
 	imports: [
 		CommonModule,
@@ -46,7 +49,8 @@ import { ActivitiesComponent } from './activities/activities.component';
 		PagesRoutingModule,
 		SharedModule,
 		ComponentsModule,
-		ChartsModule
+		ChartsModule,
+		PipesModule
 	],
 	exports: [
 		PagesComponent

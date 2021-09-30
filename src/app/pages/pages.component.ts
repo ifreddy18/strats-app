@@ -22,8 +22,7 @@ export class PagesComponent implements AfterViewInit {
 		public stravaService: StravaService
 	) {
 		setTimeout(() => {
-			console.log(stravaAuthService.accessToken);
-			if (stravaAuthService.accessToken !== null && stravaAuthService.accessToken !== undefined) {
+			if (stravaAuthService.accessToken !== null  && stravaAuthService.accessToken !== undefined) {
 				this.getAthlete();
 				this.getAthleteActivities();
 			}

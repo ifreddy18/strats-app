@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // Components
 import { RangePillsComponent } from './range-pills/range-pills.component';
@@ -44,6 +45,7 @@ import { PipesModule } from '../pipes/pipes.module';
 		MatButtonToggleModule,
 		MatTableModule,
 		MatPaginatorModule,
+		MatProgressSpinnerModule,
 		FormsModule,
 		PipesModule
 	],

@@ -1,0 +1,113 @@
+<main class="component-container" *ngIf="activity">
+
+	<img *ngIf="activity.photos.primary"
+		 [src]="activity.photos.primary.urls[600]" 
+		 [alt]="activity.name"
+		 class="activity-photo">
+
+	<h1>{{ activity.name }}</h1>
+	<p class="activity-info">
+		<span class="date">{{ activity.start_date_local | date:'fullDate'}}</span>
+		<br>
+		<span>{{ activity.type }}</span>
+	</p>
+	<!-- Crear Pipe para iconos -->
+
+	<h2 class="subtitle" *ngIf="activity.description">Description</h2>
+	<div class="description" *ngIf="activity.description">{{ activity.description }}</div>
+	<mat-divider class="mat-divider-custom" *ngIf="activity.description"></mat-divider>
+
+	<h2 class="subtitle">Stats</h2>
+	<div class="subgroup-container">
+
+		<div class="subgroup-element">
+			<mat-icon>timer</mat-icon>
+			<div class="subgroup-element-title">Duration</div>
+			<div class="subgroup-element-value">{{ activity.moving_time | duration }}</div>
+		</div>
+
+		<div class="subgroup-element" *ngIf="activity.distance">
+			<mat-icon>straighten</mat-icon>
+			<div class="subgroup-element-title">Distance</div>
+			<div class="subgroup-element-value">{{ activity.distance | distance }} Km</div>
+		</div>
+
+		<div class="subgroup-element" *ngIf="activity.total_elevation_gain">
+			<mat-icon>trending_up</mat-icon>
+			<div class="subgroup-element-title">Total Elevation Gain</div>
+			<div class="subgroup-element-value">{{ activity.total_elevation_gain }} m</div>
+		</div>
+
+		<div class="subgroup-element" *ngIf="activity.average_speed">
+			<mat-icon>speed</mat-icon>
+			<div class="subgroup-element-title">Pace</div>
+			<div class="subgroup-element-value">{{ activity.average_speed | pace }} min/Km</div>
+		</div>
+
+		<div class="subgroup-element" *ngIf="activity.average_speed">
+			<mat-icon>speed</mat-icon>
+			<div class="subgroup-element-title">Avg. Speed</div>
+			<div class="subgroup-element-value">{{ activity.average_speed | avgSpeed }} Km/h</div>
+		</div>
+
+		<div class="subgroup-element" *ngIf="activity.max_speed">
+			<mat-icon>speed</mat-icon>
+			<div class="subgroup-element-title">Max. Speed</div>
+			<div class="subgroup-element-value">{{ activity.max_speed | avgSpeed }} Km/h</div>
+		</div>
+
+		<div class="subgroup-element" *ngIf="activity.calories">
+			<mat-icon>local_fire_department</mat-icon>
+			<div class="subgroup-element-title">Calories</div>
+			<div class="subgroup-element-value">{{ activity.calories }} cal</div>
+		</div>
+
+	</div>
+
+	<mat-divider class="mat-divider-custom"></mat-divider>
+
+	<h2 class="subtitle" *ngIf="activity.device_name || activity.gear_id">
+		Gear
+	</h2>
+	<div class="subgroup-container" 
+		 *ngIf="activity.device_name || activity.gear_id">
+
+		<div class="subgroup-element" *ngIf="activity.device_name">
+			<mat-icon>phone_iphone</mat-icon>
+			<div class="subgroup-element-title">Device</div>
+			<div class="subgroup-element-value">{{ activity.device_name }}</div>
+		</div>
+
+		<div class="subgroup-element" *ngIf="activity.gear_id">
+			<mat-icon>construction</mat-icon>
+			<div class="subgroup-element-title">Gear</div>
+			<div class="subgroup-element-value">{{ activity.gear.name }}</div>
+		</div>
+
+	</div>
+
+	<mat-divider class="mat-divider-custom" 
+	 			 *ngIf="activity.device_name || activity.gear_id"></mat-divider>
+
+	<h2 class="subtitle">Social</h2>
+	<div class="subgroup-container">
+
+		<div class="subgroup-element">
+			<mat-icon>thumb_up</mat-icon>
+			<div class="subgroup-element-title">Kudos</div>
+			<div class="subgroup-element-value">{{ activity.kudos_count }}</div>
+		</div>
+
+		<div class="subgroup-element">
+			<mat-icon>message</mat-icon>
+			<div class="subgroup-element-title">Comments</div>
+			<div class="subgroup-element-value">{{ activity.comment_count }}</div>
+		</div>
+
+	</div>
+
+
+
+</main>
+
+<app-loading *ngIf="!activity"></app-loading>

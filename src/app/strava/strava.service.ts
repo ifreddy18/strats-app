@@ -18,7 +18,6 @@ export class StravaService {
 		private http: HttpClient,
 		public stravaAuthService: StravaAuthService
 	) {
-		console.log('PagesComponent - Constructor');
 		this.headers = this.headers.set('Authorization', `Bearer ${stravaAuthService.accessToken}`);
 		this.getAthleteStats();
 	}
@@ -62,6 +61,12 @@ export class StravaService {
 				per_page: '200',
 				page: `${page}`
 			}
+		});
+	}
+
+	getActivityById(id: number): Observable<object> {
+		return this.http.get(`${this.baseUrl}/activities/${id}`, {
+			headers: this.headers
 		});
 	}
 

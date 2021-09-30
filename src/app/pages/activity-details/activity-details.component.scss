@@ -1,0 +1,102 @@
+@import '../../../assets/base';
+
+.component-container {
+    // background-color: transparent !important;
+    justify-content: start;
+}
+
+
+
+.activity-photo {
+    width: 100vw;
+    margin-bottom: 16px;
+    max-width: 600px;
+}
+
+h1 {
+    width: 100%;
+    margin: 0;
+}
+
+.activity-info {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+
+    .date {
+        color:rgba(0, 0, 0, .54)
+    }
+
+}
+
+.subtitle {
+    color: rgba(0, 0, 0, .54);
+    font-size: 14px;
+    width: 100%;
+    text-align: start;
+    font-weight: 500;
+    margin: 8px 0;
+}
+
+.description {
+    white-space: pre-line;
+    width: 100%;
+    height: 100%;
+    padding: 0 0 16px;
+    text-align: start;   
+}
+
+mat-divider {
+    width: 100%;
+    color: rgba(0, 0, 0, .54);
+}
+
+.subgroup-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    .subgroup-element {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        margin: 0 0 16px;
+
+        mat-icon {
+            margin: 0 16px 0 0;
+        }
+
+        div {
+            line-height: 24px;
+        }
+    }
+
+    .subgroup-element-title {
+        font-size: 14px;
+    }
+
+    .subgroup-element-value {
+        position: absolute;
+        right: 0;
+    }
+}
+
+// .list {
+//     width: 100%;
+// }
+
+// .activity-list-item {
+//     width: 100% !important;
+//     display: flex !important;
+//     flex-direction: row !important;
+//     justify-content: space-between !important;
+
+//     .mat-list-item-content {
+//         width: 100% !important;
+//     }
+// }
+
+// .description-list-item {
+//     height: 100% !important;
+// }
