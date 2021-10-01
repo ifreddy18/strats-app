@@ -1,11 +1,8 @@
 @import '../../../assets/base';
 
 .component-container {
-    // background-color: transparent !important;
     justify-content: start;
 }
-
-
 
 .activity-photo {
     width: 100vw;
@@ -81,22 +78,3 @@ mat-divider {
         right: 0;
     }
 }
-
-// .list {
-//     width: 100%;
-// }
-
-// .activity-list-item {
-//     width: 100% !important;
-//     display: flex !important;
-//     flex-direction: row !important;
-//     justify-content: space-between !important;
-
-//     .mat-list-item-content {
-//         width: 100% !important;
-//     }
-// }
-
-// .description-list-item {
-//     height: 100% !important;
-// }

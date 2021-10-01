@@ -1,1 +1,71 @@
-<p>profile works!</p>
+<main *ngIf="user" class="main-container">
+    
+    <div class="profile-container">
+        <img class="profile-img"
+             [src]="user.profile_medium" 
+             [alt]="user.username">
+
+        <div class="info">
+            <h1>{{ user.firstname }} {{ user.lastname }}</h1>
+            <div class="bio">{{ user.bio }}</div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+
+	<h2 class="subtitle">Personal info</h2>
+	<div class="subgroup-container">
+		<div class="subgroup-element">
+			<mat-icon>person</mat-icon>
+			<div class="subgroup-element-title">Username</div>
+			<div class="subgroup-element-value">{{ user.username }}</div>
+		</div>
+
+		<div class="subgroup-element">
+			<mat-icon>monitor_weight</mat-icon>
+			<div class="subgroup-element-title">Weight</div>
+			<div class="subgroup-element-value">{{ user.weight }}</div>
+		</div>
+
+    </div>
+    <mat-divider></mat-divider>
+
+    <h2 class="subtitle">Social</h2>
+	<div class="subgroup-container">
+		<div class="subgroup-element">
+			<div class="subgroup-element-title">Followers</div>
+			<div class="subgroup-element-value">{{ user.follower_count }}</div>
+		</div>
+
+        <div class="subgroup-element">
+			<div class="subgroup-element-title">Following</div>
+			<div class="subgroup-element-value">{{ user.friend_count }}</div>
+		</div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <h2 class="subtitle">Account</h2>
+	<div class="subgroup-container">
+		<div class="subgroup-element">
+			<div class="subgroup-element-title">In Strava since</div>
+			<div class="subgroup-element-value">{{ user.created_at | date:'fullDate' }}</div>
+		</div>
+
+		<div class="subgroup-element">
+			<div class="subgroup-element-title">Last update</div>
+			<div class="subgroup-element-value">{{ user.updated_at | date:'fullDate' }}</div>
+		</div>
+
+        <div class="subgroup-element">
+			<div class="subgroup-element-title">Mesurement Preference</div>
+			<div class="subgroup-element-value">{{ user.measurement_preference }}</div>
+		</div>
+    </div>
+    <mat-divider></mat-divider>
+
+	
+
+
+
+</main>
+
+<app-loading *ngIf="!user" class="main-container"></app-loading>

@@ -1,4 +1,4 @@
-<main class="component-container" *ngIf="activity">
+<main class="main-container" *ngIf="activity">
 
 	<img *ngIf="activity.photos.primary"
 		 [src]="activity.photos.primary.urls[600]" 
@@ -110,4 +110,4 @@
 
 </main>
 
-<app-loading *ngIf="!activity"></app-loading>
+<app-loading *ngIf="!activity" class="main-container"></app-loading>

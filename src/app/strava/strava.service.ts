@@ -9,7 +9,7 @@ export class StravaService {
 
 	public baseUrl = 'https://www.strava.com/api/v3';
 	public headers = new HttpHeaders();
-	public user: UserModel;
+	public user;
 	public athleteActivities: any[];
 	public activityTypeList = ['All'];
 	public distances = [];
@@ -19,7 +19,7 @@ export class StravaService {
 		public stravaAuthService: StravaAuthService
 	) {
 		this.headers = this.headers.set('Authorization', `Bearer ${stravaAuthService.accessToken}`);
-		this.getAthleteStats();
+		// this.getAthleteStats();
 	}
 
 	getAthleteData = new Observable(observer => {
@@ -48,8 +48,8 @@ export class StravaService {
 		});
 	}
 
-	getAthleteStats(): Observable<object> {
-		return this.http.get(`${this.baseUrl}/athletes/68259044/stats`, {
+	getAthleteStats(id: number | string): Observable<object> {
+		return this.http.get(`${this.baseUrl}/athletes/${id}/stats`, {
 			headers: this.headers
 		});
 	}

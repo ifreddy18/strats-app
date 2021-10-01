@@ -44,30 +44,7 @@ export class PagesComponent implements AfterViewInit {
 
 	getAthlete(): void {
 		this.stravaService.getAthlete().subscribe((resp: any) => {
-			const {
-				id,
-				firstname,
-				lastname,
-				username,
-				profile_medium,
-				profile,
-				date_preference,
-				measurement_preference,
-				created_at
-			} = resp;
-
-			this.stravaService.user = {
-				id,
-				firstname,
-				lastname,
-				username,
-				profile_medium,
-				profile,
-				date_preference,
-				measurement_preference,
-				created_at
-			};
-
+			this.stravaService.user = resp;
 			this.user = this.stravaService.user;
 
 		}, err => {

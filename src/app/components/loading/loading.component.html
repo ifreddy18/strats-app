@@ -1,12 +1,14 @@
-<h2 *ngIf="stravaAuthService.accessToken">
-    Connecting to Strava...
-    <br>
-    <mat-progress-spinner></mat-progress-spinner>
-    <span>
-        If this take more than few seconds, please reload. 
-    </span>
-</h2>
-
-<button (click)="getAuthorizationCode()" *ngIf="!stravaAuthService.accessToken">
-    Vincular con Strava
-</button>
+<div class="component-container">
+    <div class="message-container" *ngIf="stravaAuthService.accessToken">
+        <h2>Connecting to Strava...</h2>
+        <br>
+        <mat-spinner [diameter]="70"></mat-spinner>
+        <span>
+            If this take more than few seconds, please reload. 
+        </span>
+    </div>
+    
+    <button (click)="getAuthorizationCode()" *ngIf="!stravaAuthService.accessToken">
+        Vincular con Strava
+    </button>
+</div>

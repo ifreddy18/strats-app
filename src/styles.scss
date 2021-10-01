@@ -35,4 +35,10 @@ body {
   font-size: 1rem;
 }
 
+@media (min-width: 1025px) {
+  .main-container {
+    margin-left: 16px + $sidebar-width;
+  }
+}
+
 

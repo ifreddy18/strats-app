@@ -1,7 +1,19 @@
-h2 {
-    text-align: center;
-    span {
-        font-size: 14px;
-        color: #ccc;
+@import '../../../assets/base';
+
+.component-container {
+    background-color: transparent;
+}
+
+.message-container {
+    @include flex-column;
+    
+    h2 {
+        text-align: center;
+        span {
+            margin: 8px auto;
+            font-size: 14px;
+            color: #ccc;
+        }
     }
+
 }
