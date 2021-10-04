@@ -1,4 +1,4 @@
-<main class="main-container" *ngIf="activity">
+<main class="main-container max-600 bg-white box-shadow" *ngIf="activity">
 
 	<img *ngIf="activity.photos.primary"
 		 [src]="activity.photos.primary.urls[600]" 
@@ -64,7 +64,7 @@
 
 	</div>
 
-	<mat-divider class="mat-divider-custom"></mat-divider>
+	<mat-divider class="mat-divider-custom" *ngIf="activity.device_name || activity.gear_id"></mat-divider>
 
 	<h2 class="subtitle" *ngIf="activity.device_name || activity.gear_id">
 		Gear

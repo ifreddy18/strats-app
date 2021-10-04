@@ -1,13 +1,9 @@
 @import '../../../assets/base';
 
-.component-container {
-    justify-content: start;
-}
-
 .activity-photo {
-    width: 100vw;
     margin-bottom: 16px;
     max-width: 600px;
+    max-height: 500px;
 }
 
 h1 {

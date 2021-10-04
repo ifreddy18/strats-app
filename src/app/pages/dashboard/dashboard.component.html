@@ -1,30 +1,37 @@
 <main *ngIf="stravaService.athleteActivities" class="main-container">
 
      <app-range-pills class="component-container" (eventEmitter)="getDataToChart($event)"></app-range-pills>
-     
-     <app-general-stats class="component-container" [dataToChart]="dataToChart"></app-general-stats>
-     
-     <!-- <app-best-stats [dataToChart]="dataToChart"></app-best-stats> -->
 
-     <app-duration-chart class="component-container"
-        [dataToChart]="dataToChart" 
-        [activityParam]="'moving_time'" 
-        [labelForDataset]="'Moving Time (h)'">
-    </app-duration-chart>
+     <div class="grid-container">
+ 
+        <app-general-stats class="component-container" 
+                           [dataToChart]="dataToChart">
+        </app-general-stats>
+        
+        <!-- <app-best-stats [dataToChart]="dataToChart"></app-best-stats> -->
 
-     <app-duration-chart class="component-container"
-        [dataToChart]="dataToChart" 
-        [activityParam]="'distance'" 
-        [labelForDataset]="'Distance (Km)'" 
-        [backgroundColor]="['rgba(150, 99, 132, 0.8)']">
-    </app-duration-chart>
+        <app-duration-chart class="component-container"
+            [dataToChart]="dataToChart" 
+            [activityParam]="'moving_time'" 
+            [labelForDataset]="'Moving Time (h)'">
+        </app-duration-chart>
 
-    <app-duration-chart class="component-container"
-        [dataToChart]="dataToChart" 
-        [activityParam]="'total_elevation_gain'" 
-        [labelForDataset]="'Total Elevation (m)'" 
-        [backgroundColor]="['rgba(150, 99, 250, 0.8)']">
-    </app-duration-chart>
+        <app-duration-chart class="component-container"
+            [dataToChart]="dataToChart" 
+            [activityParam]="'distance'" 
+            [labelForDataset]="'Distance (Km)'" 
+            [backgroundColor]="['rgba(150, 99, 132, 0.8)']">
+        </app-duration-chart>
+
+        <app-duration-chart class="component-container"
+            [dataToChart]="dataToChart" 
+            [activityParam]="'total_elevation_gain'" 
+            [labelForDataset]="'Total Elevation (m)'" 
+            [backgroundColor]="['rgba(150, 99, 250, 0.8)']">
+        </app-duration-chart>
+
+    </div>
+
 
 </main>
 

@@ -33,7 +33,7 @@
 <aside class="sidebar">
     <a class="profile" routerLink="profile" (click)="toggleSidebar()">
         <mat-icon *ngIf="!user">account_circle</mat-icon>
-            <img [src]="user.profile_medium" 
+        <img [src]="user.profile_medium" 
              [alt]="user.username"  
              *ngIf="user"
              class="profile-img">     
@@ -45,6 +45,7 @@
     <app-sidebar-tree></app-sidebar-tree>
 </aside>
 
-<router-outlet></router-outlet>
+<div class="router-container">
+    <router-outlet></router-outlet>
 
-
+</div>

@@ -89,7 +89,6 @@
         }
     }
 
-
     mat-divider {
         height: 1px;
         width: 100%;
@@ -103,7 +102,7 @@ app-sidebar-tree {
     width: 100%;
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 900px) {
 
     .menu-btn {
         z-index: -99;
@@ -111,6 +110,10 @@ app-sidebar-tree {
 
     .sidebar {
         transform: translate(0);
+    }
+
+    .router-container {
+        margin-left: $sidebar-width;
     }
 
 }

@@ -27,17 +27,20 @@ body {
 }
 
 .main-container {
-  margin: 16px;
+  margin: 16px auto;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
-}
 
-@media (min-width: 1025px) {
-  .main-container {
-    margin-left: 16px + $sidebar-width;
+  &.max-600 {
+    max-width: 600px;
+  }
+
+  &.bg-white {
+   background-color: $white;
   }
 }
 

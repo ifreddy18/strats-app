@@ -69,6 +69,10 @@ mat-button-toggle-group {
         grid-template-columns: repeat(6, 1fr);
     }
 
+    .range-btn-container {
+        width: 480px !important;
+    }
+
     .selects-container {
         mat-form-field {
             width: 230px;
@@ -78,18 +82,20 @@ mat-button-toggle-group {
 
 @media (min-width: 769px) {
     .type-btn-container {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .range-btn-container {
-        width: 100% !important;
-        max-width: 327px !important;
+        grid-template-columns: repeat(7, 1fr);
     }
 
     .selects-container {
         mat-form-field {
-            width: 130px;
+            width: 250px;
         }
+    }
+}
+
+@media (min-width: 1025px) {
+    .type-btn-container {
+        grid-template-columns: repeat(8, 1fr);
     }
 
 }
+
