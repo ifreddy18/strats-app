@@ -16,8 +16,4 @@ export class ActivitiesComponent {
 		this.activities = event.activities;
 	}
 
-	viewActivity(id: number): void {
-		console.log(id);
-	}
-
 }

@@ -14,15 +14,7 @@ export class StravaService {
 	public activityTypeList = ['All'];
 	public distances = [];
 
-	constructor(
-		private http: HttpClient,
-		public stravaAuthService: StravaAuthService
-	) {
-		this.headers = this.headers.set('Authorization', `Bearer ${stravaAuthService.accessToken}`);
-		// this.getAthleteStats();
-	}
-
-	getAthleteData = new Observable(observer => {
+	public getAthleteData$ = new Observable(observer => {
 		const intervalo = setInterval(() => {
 			observer.next(this.user);
 			if (this.user) {
@@ -32,7 +24,7 @@ export class StravaService {
 		}, 1000);
 	});
 
-	getAthleteAllActivities = new Observable(observer => {
+	public getAthleteAllActivities$ = new Observable(observer => {
 		const intervalo = setInterval(() => {
 			if (this.athleteActivities) {
 				observer.next(this.athleteActivities);
@@ -41,6 +33,13 @@ export class StravaService {
 			}
 		}, 1000);
 	});
+
+	constructor(
+		private http: HttpClient,
+		public stravaAuthService: StravaAuthService
+	) {
+		this.headers = this.headers.set('Authorization', `Bearer ${stravaAuthService.accessToken}`);
+	}
 
 	getAthlete(): Observable<object> {
 		return this.http.get(`${this.baseUrl}/athlete`, {

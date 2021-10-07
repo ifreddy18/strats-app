@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { tap, map, catchError, first } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-
-
 
 @Injectable()
 export class StravaAuthService {
@@ -46,7 +42,6 @@ export class StravaAuthService {
 	}
 
 	initService(): void {
-		// console.log(this.refreshToken.length);
 
 		if ( null !== sessionStorage.getItem('accessToken') ) {
 			this.accessToken = sessionStorage.getItem('accessToken');
@@ -80,7 +75,6 @@ export class StravaAuthService {
 	 * si existe el parametro code se procede a solicitar los token a la API de Strava
 	 */
 	getAthleteTokens(): void {
-		console.log('getAthleteTokens');
 		this.routed.queryParams.subscribe( resp => {
 			if (resp.code) {
 				this.stravaIsLinked = true;
@@ -95,7 +89,6 @@ export class StravaAuthService {
 	 * @param authToken code
 	 */
 	getTokensWithAuthCode(authToken: string): void {
-		console.log('getTokensWithAuthCode');
 		this.http.post(`${ this.baseUrlAuth }/token?`
 					+ `client_id=${ this.clientId }`
 					+ `&client_secret=${ this.clientSecret }`
@@ -115,7 +108,6 @@ export class StravaAuthService {
 	 * Se solicita el access_token con el refresh_token
 	 */
 	getAccessToken(): void{
-		console.log('getAccessToken');
 		this.http.post(`${ this.baseUrlAuth }/token?`
 					+ `client_id=${ this.clientId }`
 					+ `&client_secret=${ this.clientSecret }`
@@ -132,7 +124,6 @@ export class StravaAuthService {
 	}
 
 	logout(): void {
-		console.log('Logout');
 		this.deleteRefreshToken();
 		sessionStorage.removeItem('accessToken');
 		this.accessToken = null;

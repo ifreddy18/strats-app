@@ -23,17 +23,22 @@ export class ActivitiesTableComponent implements OnChanges, AfterViewInit {
 	) { }
 
 	ngAfterViewInit(): void {
-		this.dataSource = new MatTableDataSource(this.activities);
-		this.dataSource.paginator = this.paginator;
-		this.cdr.detectChanges();
+		this.updateTable();
 	}
 
 	ngOnChanges(): void {
+		this.updateTable();
 		if (this.table) {this.table.renderRows(); }
 	}
 
 	viewActivity(id: number): void {
 		this.router.navigateByUrl(`dashboard/activity/${id}`);
+	}
+
+	updateTable(): void {
+		this.dataSource = new MatTableDataSource(this.activities);
+		this.dataSource.paginator = this.paginator;
+		this.cdr.detectChanges();
 	}
 
 }

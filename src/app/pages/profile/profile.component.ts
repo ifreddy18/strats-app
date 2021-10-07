@@ -18,7 +18,6 @@ export class ProfileComponent implements AfterViewInit {
 			this.user = this.stravaService.user;
 			if (this.user) {
 				clearInterval(interval);
-				console.log(this.user);
 			}
 		}, 500);
 	}

@@ -187,10 +187,10 @@ export class ChartService {
 				return `${date.format('MMMM')}`;
 
 			case 'week':
-				return `${date.format('YYYY-MM-DD')} al ${date.endOf('week').format('YYYY-MM-DD')}`;
+				return `${date.format('MMM-DD')} - ${date.endOf('week').format('MMM-DD')}`;
 
 			case 'day':
-				return `${date.format('YYYY-MM-DD')}`;
+				return `${date.format('MMM-DD')}`;
 		}
 
 	}

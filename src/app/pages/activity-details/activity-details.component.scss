@@ -1,14 +1,17 @@
 @import '../../../assets/base';
 
+.main-container {
+    padding-top: 0;
+}
+
 .activity-photo {
-    margin-bottom: 16px;
     max-width: 600px;
     max-height: 500px;
 }
 
 h1 {
     width: 100%;
-    margin: 0;
+    margin: 20px auto 0;
 }
 
 .activity-info {

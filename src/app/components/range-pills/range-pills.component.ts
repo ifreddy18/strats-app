@@ -22,14 +22,14 @@ export class RangePillsComponent {
 	public filterActivities = [];
 
 	constructor(public stravaService: StravaService) {
-		this.stravaService.getAthleteData.subscribe(data => {
+		this.stravaService.getAthleteData$.subscribe(data => {
 			if (data) {
 				this.setDropDownYear();
 				this.setDropDownMonth();
 			}
 		});
 
-		this.stravaService.getAthleteAllActivities.subscribe((resp: any) => {
+		this.stravaService.getAthleteAllActivities$.subscribe((resp: any) => {
 			this.allActivities = resp;
 			this.getDataByRangeAndType(this.activedRange, this.activedTypes);
 		});
@@ -179,8 +179,6 @@ export class RangePillsComponent {
 			);
 		}
 
-		console.log(this.filterActivities);
-
 		// Emitter to Dashboard
 		this.eventEmitter.emit({
 			activities: this.filterActivities,
@@ -214,11 +212,5 @@ export class RangePillsComponent {
 		this.getDataByRangeAndType('', this.activedTypes);
 
 	}
-
-
-
-
-
-
 
 }

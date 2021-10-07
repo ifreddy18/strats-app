@@ -13,7 +13,6 @@ export class StravaAuthGuard implements CanActivate {
 		private routed: ActivatedRoute) { }
 
 	canActivate(): boolean {
-		console.log('StravaAuthGuard');
 
 		if (!this.stravaAuthService.isAuthenticate) {
 			this.router.navigateByUrl('home');
