@@ -2,8 +2,12 @@
 
     <h1>Home</h1>
 
-    <button (click)="getAuthorizationCode()" *ngIf="!stravaAuthService.accessToken">
+    <button (click)="getAuthorizationCode()" *ngIf="!stravaAuthService.isAuthenticate">
         Vincular con Strava
+    </button>
+
+    <button routerLink="dashboard" *ngIf="stravaAuthService.isAuthenticate">
+        Go to Dashboard
     </button>
 
 </main>

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { tap, map, catchError, first } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+
 
 
 @Injectable()
@@ -10,7 +13,7 @@ export class StravaAuthService {
 
 	private clientId = '68448';
 	private clientSecret = 'cc5f513bb5eab02deac5bf008da46f928ec6cb6f';
-	private redirectUri = 'http://localhost:4200';
+	private redirectUri = 'http://localhost:4200/home';
 	private responseType = 'code';
 	private approvalPrompt = 'auto'; // auto / force
 	private scope = 'read_all,activity:read_all,profile:read_all';
@@ -32,6 +35,10 @@ export class StravaAuthService {
 
 	get refreshToken(): string {
 		return document.cookie.replace(/(?:(?:^|.*;\s*)refresh_token\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+	}
+
+	get isAuthenticate(): boolean {
+		return this.stravaIsLinked;
 	}
 
 	deleteRefreshToken(): void {
@@ -76,6 +83,8 @@ export class StravaAuthService {
 		console.log('getAthleteTokens');
 		this.routed.queryParams.subscribe( resp => {
 			if (resp.code) {
+				this.stravaIsLinked = true;
+				this.router.navigateByUrl('dashboard');
 				this.getTokensWithAuthCode(resp.code);
 			}
 		}, ( err => console.warn(err) ));
