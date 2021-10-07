@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { CanActivate, Router, ActivatedRoute } from '@angular/router';
 import { StravaAuthService } from '../strava/strava-auth.service';
 
 @Injectable({

@@ -1,12 +1,18 @@
 <main class="main-container">
 
-    <h1>Home</h1>
+    <div class="bg-img"></div>
 
-    <button (click)="getAuthorizationCode()" *ngIf="!stravaAuthService.isAuthenticate">
-        Vincular con Strava
+    <h1>Welcome to StratsApp</h1>
+
+    <button class="home-btn"
+            (click)="getAuthorizationCode()" 
+            *ngIf="!stravaAuthService.isAuthenticate">
+        Connect with <span class="strava-font">STRAVA</span>   
     </button>
 
-    <button routerLink="dashboard" *ngIf="stravaAuthService.isAuthenticate">
+    <button class="home-btn"
+            routerLink="dashboard"
+            *ngIf="stravaAuthService.isAuthenticate">
         Go to Dashboard
     </button>
 
