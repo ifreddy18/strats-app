@@ -2,7 +2,8 @@
 
 # My files
 strava-api-auth-guide
-my-notes.md
+my-notes
+src/data
 
 # compiled output
 /dist

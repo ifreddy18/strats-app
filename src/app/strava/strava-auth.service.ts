@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class StravaAuthService {
@@ -9,7 +10,7 @@ export class StravaAuthService {
 
 	private clientId = '68448';
 	private clientSecret = 'cc5f513bb5eab02deac5bf008da46f928ec6cb6f';
-	private redirectUri = 'http://localhost:4200/home';
+	private redirectUri = `${ environment.redirectUriStravaAuth }/home`;
 	private responseType = 'code';
 	private approvalPrompt = 'auto'; // auto / force
 	private scope = 'read_all,activity:read_all,profile:read_all';
