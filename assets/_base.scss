@@ -1,0 +1,52 @@
+$white: #fff;
+$dark-grey: #242A33;
+$sidebar-font-color: #687384;
+$light-grey: #f4f6f9;
+$black: rgba(0, 0, 0, .87);
+$orange-strava: #fc5200;
+
+$sidebar-width: 215px;
+$topbar-height: 70px;
+$component-shadow: 0 8px 24px rgba(13,13,18,.04);
+
+.component-container {
+    width: 100%;
+    padding: 20px;
+    margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    background: $white;
+    box-shadow: 6px 6px 26px -14px rgba(0,0,0,.25);
+}
+
+mat-button-toggle {
+    .mat-button-toggle-button {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+app-activities-table {
+    width: 100%;
+}
+
+app-range-pills.component-container {
+    margin-top: -15px;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-shadow {
+    box-shadow: 6px 6px 26px -15px rgba(0,0,0,.20);
+}
