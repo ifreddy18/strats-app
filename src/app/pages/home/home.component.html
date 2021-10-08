@@ -4,13 +4,13 @@
 
     <h1>Welcome to StratsApp</h1>
 
-    <button class="home-btn"
+    <button class="connect-btn"
             (click)="getAuthorizationCode()" 
             *ngIf="!stravaAuthService.isAuthenticate">
         Connect with <span class="strava-font">STRAVA</span>   
     </button>
 
-    <button class="home-btn"
+    <button class="connect-btn"
             routerLink="dashboard"
             *ngIf="stravaAuthService.isAuthenticate">
         Go to Dashboard

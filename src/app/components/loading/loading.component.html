@@ -8,7 +8,7 @@
         </span>
     </div>
     
-    <button (click)="getAuthorizationCode()" *ngIf="!stravaAuthService.accessToken">
-        Vincular con Strava
+    <button class="connect-btn" (click)="getAuthorizationCode()" *ngIf="!stravaAuthService.accessToken">
+        Connect with <span class="strava-font">STRAVA</span> 
     </button>
 </div>
